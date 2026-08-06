@@ -81,9 +81,7 @@ export default function SplitPdf() {
     if (settings.mode === "every") return chunkEvery(total, Math.max(1, settings.every));
     if (settings.mode === "ranges") return parseRanges(settings.ranges, total);
     // select: one PDF containing only the selected pages, in original order
-    const indices = pages
-      .filter((p) => selected.has(`p-${p.index}`))
-      .map((p) => p.index);
+    const indices = pages.filter((p) => selected.has(`p-${p.index}`)).map((p) => p.index);
     return indices.length ? [indices] : [];
   }, [pages, selected, settings.every, settings.mode, settings.ranges, total]);
 
@@ -125,8 +123,7 @@ export default function SplitPdf() {
         const copied = await out.copyPages(src, g);
         for (const p of copied) out.addPage(p);
         const bytes = await out.save();
-        const label =
-          g.length === 1 ? `p${g[0] + 1}` : `p${g[0] + 1}-${g[g.length - 1] + 1}`;
+        const label = g.length === 1 ? `p${g[0] + 1}` : `p${g[0] + 1}-${g[g.length - 1] + 1}`;
         entries[`${baseName}-${label}.pdf`] = bytes;
       }
       // single result → just download the PDF; multiple → ZIP
@@ -204,15 +201,16 @@ export default function SplitPdf() {
             </RadioGroup>
             {settings.mode === "select" && (
               <p className="mt-3 text-xs text-muted-foreground">
-                Click pages below to include them in a single output PDF. Shift-click for a
-                range.
+                Click pages below to include them in a single output PDF. Shift-click for a range.
               </p>
             )}
             <p className="mt-3 font-mono text-xs text-muted-foreground">
               {groups.length === 0 ? (
                 <span className="text-destructive">No valid pages selected</span>
               ) : groups.length === 1 ? (
-                <>Will produce 1 PDF · {groups[0].length} pages · source {formatBytes(file.size)}</>
+                <>
+                  Will produce 1 PDF · {groups[0].length} pages · source {formatBytes(file.size)}
+                </>
               ) : (
                 <>
                   Will produce {groups.length} PDFs in a ZIP ·{" "}

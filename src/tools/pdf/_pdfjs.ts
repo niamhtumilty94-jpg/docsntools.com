@@ -55,10 +55,6 @@ export async function renderPageBlob(
   if (!ctx) throw new Error("2d context unavailable");
   await page.render({ canvasContext: ctx, viewport: v, canvas }).promise;
   return await new Promise<Blob>((resolve, reject) =>
-    canvas.toBlob(
-      (b) => (b ? resolve(b) : reject(new Error("toBlob failed"))),
-      type,
-      quality,
-    ),
+    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob failed"))), type, quality),
   );
 }

@@ -90,7 +90,14 @@ export default function PageNumbers() {
         const { width, height } = page.getSize();
         const text = renderText(settings.format, i + settings.start, total);
         const tw = font.widthOfTextAtSize(text, settings.size);
-        const { x, y } = anchorPosition(width, height, tw, settings.size, settings.position, settings.margin);
+        const { x, y } = anchorPosition(
+          width,
+          height,
+          tw,
+          settings.size,
+          settings.position,
+          settings.margin,
+        );
         page.drawText(text, {
           x,
           y,
@@ -175,7 +182,10 @@ export default function PageNumbers() {
           />
           <p className="mt-1 text-[11px] text-muted-foreground">
             <code>{"{n}"}</code> = current page · <code>{"{total}"}</code> = total. Try{" "}
-            <code>Page {"{n}"} of {"{total}"}</code>.
+            <code>
+              Page {"{n}"} of {"{total}"}
+            </code>
+            .
           </p>
         </div>
         <div>
@@ -242,7 +252,11 @@ export default function PageNumbers() {
               }}
             >
               {previewPage.thumb && (
-                <img src={previewPage.thumb} alt="" className="absolute inset-0 h-full w-full object-contain" />
+                <img
+                  src={previewPage.thumb}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-contain"
+                />
               )}
               {overlayStyle && (
                 <span
@@ -262,18 +276,12 @@ export default function PageNumbers() {
       ) : null}
 
       <div className="flex flex-wrap items-center gap-2">
-        <Button
-          onClick={run}
-          disabled={!file || busy}
-          variant={result ? "outline" : "default"}
-        >
+        <Button onClick={run} disabled={!file || busy} variant={result ? "outline" : "default"}>
           {busy && <Loader2 className="h-4 w-4 animate-spin" />}
           {result ? "Regenerate" : "Add page numbers"}
         </Button>
         {result && (
-          <Button onClick={() => downloadBlob(result.blob, result.name)}>
-            Download PDF
-          </Button>
+          <Button onClick={() => downloadBlob(result.blob, result.name)}>Download PDF</Button>
         )}
       </div>
     </div>

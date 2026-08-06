@@ -21,10 +21,7 @@ export function SiteFooter() {
           {CATEGORIES.map((c) => (
             <div key={c.slug}>
               <div className="font-medium text-foreground">{c.name}</div>
-              <Link
-                to={c.path}
-                className="mt-1 block hover:text-foreground hover:underline"
-              >
+              <Link to={c.path} className="mt-1 block hover:text-foreground hover:underline">
                 Browse all →
               </Link>
             </div>

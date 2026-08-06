@@ -214,8 +214,8 @@ export default function BulkZipTool() {
               className="font-mono"
             />
             <p className="text-xs text-muted-foreground">
-              Tokens: <code>{"{n}"}</code> <code>{"{n:000}"}</code>{" "}
-              <code>{"{name}"}</code> <code>{"{ext}"}</code> <code>{"{date}"}</code>
+              Tokens: <code>{"{n}"}</code> <code>{"{n:000}"}</code> <code>{"{name}"}</code>{" "}
+              <code>{"{ext}"}</code> <code>{"{date}"}</code>
             </p>
           </div>
           <div className="flex items-end">
@@ -250,23 +250,15 @@ export default function BulkZipTool() {
           <>
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>
-                {items.length} file{items.length === 1 ? "" : "s"} ·{" "}
-                {formatBytes(totalSize)}
+                {items.length} file{items.length === 1 ? "" : "s"} · {formatBytes(totalSize)}
               </span>
               <Button size="sm" variant="ghost" onClick={clear} disabled={working}>
                 Clear all
               </Button>
             </div>
 
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={onDragEnd}
-            >
-              <SortableContext
-                items={items.map((i) => i.id)}
-                strategy={rectSortingStrategy}
-              >
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+              <SortableContext items={items.map((i) => i.id)} strategy={rectSortingStrategy}>
                 <ul className="divide-y divide-border rounded-lg border border-border bg-card">
                   {items.map((it, i) => (
                     <SortableRow
@@ -305,8 +297,9 @@ function SortableRow({
   onRename: (v: string) => void;
   onRemove: () => void;
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: item.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: item.id,
+  });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -358,13 +351,7 @@ function SortableRow({
       <span className="hidden truncate font-mono text-[11px] text-muted-foreground sm:block sm:max-w-[180px]">
         → {previewName}
       </span>
-      <Button
-        type="button"
-        size="icon"
-        variant="ghost"
-        onClick={onRemove}
-        aria-label="Remove file"
-      >
+      <Button type="button" size="icon" variant="ghost" onClick={onRemove} aria-label="Remove file">
         <X className="h-4 w-4" />
       </Button>
     </li>

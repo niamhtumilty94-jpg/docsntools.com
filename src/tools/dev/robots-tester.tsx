@@ -284,12 +284,7 @@ export default function RobotsTesterTool() {
         </section>
       </div>
 
-      <OutputPanel
-        title="Results"
-        text={summary}
-        filename="robots-test.txt"
-        shareUrl={shareUrl}
-      >
+      <OutputPanel title="Results" text={summary} filename="robots-test.txt" shareUrl={shareUrl}>
         {results.length === 0 ? (
           <div className="rounded-md border border-dashed border-border p-6 text-center text-xs text-muted-foreground">
             Add a robots.txt and URLs to see allow / block decisions.

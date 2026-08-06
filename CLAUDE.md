@@ -19,11 +19,11 @@ There are no automated tests. Lint and type-check are the primary correctness ga
 
 Copy `.env.example` to `.env`. Key variables:
 
-| Variable | Purpose |
-|---|---|
-| `VITE_SITE_URL` | Canonical origin - must be set before building for production (affects sitemap, canonical URLs, OG tags) |
-| `VITE_UMAMI_WEBSITE_ID` | Optional analytics |
-| `VITE_UMAMI_SRC` | Optional analytics script URL |
+| Variable                | Purpose                                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| `VITE_SITE_URL`         | Canonical origin - must be set before building for production (affects sitemap, canonical URLs, OG tags) |
+| `VITE_UMAMI_WEBSITE_ID` | Optional analytics                                                                                       |
+| `VITE_UMAMI_SRC`        | Optional analytics script URL                                                                            |
 
 ## Architecture
 
@@ -46,8 +46,11 @@ TanStack Router with file-based routes in `src/routes/`. The tool route is `$cat
 ### PDF tools
 
 PDF rendering uses `pdfjs-dist` (configured in `src/tools/pdf/_pdfjs.ts`). PDF manipulation uses `pdf-lib`. Heavy work should use Web Workers via the Comlink wrapper in `src/lib/worker-tool.ts`:
+
 ```ts
-const api = wrapWorker<MyApi>(() => new Worker(new URL("./my.worker.ts", import.meta.url), { type: "module" }));
+const api = wrapWorker<MyApi>(
+  () => new Worker(new URL("./my.worker.ts", import.meta.url), { type: "module" }),
+);
 ```
 
 ### Shared tool hooks

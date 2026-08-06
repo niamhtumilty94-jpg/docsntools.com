@@ -1,5 +1,19 @@
-import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronDown, ChevronUp, FileText, GripVertical, Loader2, RotateCw, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -72,14 +86,10 @@ export default function MergePdf() {
 
   const remove = (id: string) => setItems((cur) => cur.filter((i) => i.id !== id));
   const toggleCollapse = (id: string) =>
-    setItems((cur) =>
-      cur.map((it) => (it.id === id ? { ...it, collapsed: !it.collapsed } : it)),
-    );
+    setItems((cur) => cur.map((it) => (it.id === id ? { ...it, collapsed: !it.collapsed } : it)));
   const rotateAll = (id: string) =>
     setItems((cur) =>
-      cur.map((it) =>
-        it.id === id ? { ...it, rotateAll: (it.rotateAll + 90) % 360 } : it,
-      ),
+      cur.map((it) => (it.id === id ? { ...it, rotateAll: (it.rotateAll + 90) % 360 } : it)),
     );
 
   const onDragEnd = (e: DragEndEvent) => {
@@ -125,12 +135,7 @@ export default function MergePdf() {
   return (
     <div className="space-y-4">
       <ToolToaster />
-      <PdfDropArea
-        file={null}
-        onFile={() => {}}
-        multiple
-        onFiles={addFiles}
-      />
+      <PdfDropArea file={null} onFile={() => {}} multiple onFiles={addFiles} />
 
       {items.length > 0 && (
         <>
@@ -205,16 +210,14 @@ function SourceRow({
   onToggleCollapse: () => void;
   onRotateAll: () => void;
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: item.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: item.id,
+  });
   return (
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={cn(
-        "rounded-lg border border-border bg-card p-3",
-        isDragging && "z-10 shadow-lg",
-      )}
+      className={cn("rounded-lg border border-border bg-card p-3", isDragging && "z-10 shadow-lg")}
     >
       <header className="flex items-center gap-2">
         <button

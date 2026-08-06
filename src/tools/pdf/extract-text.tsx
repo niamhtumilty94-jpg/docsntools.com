@@ -78,7 +78,12 @@ export default function ExtractText() {
             }
           }
           text = lines
-            .map((line) => line.sort((a, b) => a.x - b.x).map((i) => i.str).join(" "))
+            .map((line) =>
+              line
+                .sort((a, b) => a.x - b.x)
+                .map((i) => i.str)
+                .join(" "),
+            )
             .join("\n");
         } else {
           text = content.items
@@ -106,9 +111,7 @@ export default function ExtractText() {
     .join(settings.format === "md" ? "\n\n---\n\n" : "\n\n");
 
   const visibleText =
-    activePage === 0
-      ? fullText
-      : pages.find((p) => p.page === activePage)?.text ?? "";
+    activePage === 0 ? fullText : (pages.find((p) => p.page === activePage)?.text ?? "");
 
   const filename = file
     ? `${file.name.replace(/\.pdf$/i, "")}.${settings.format}`
@@ -162,10 +165,7 @@ export default function ExtractText() {
         <>
           <div className="flex flex-wrap items-center gap-2">
             <Label>Show page</Label>
-            <Select
-              value={String(activePage)}
-              onValueChange={(v) => setActivePage(Number(v))}
-            >
+            <Select value={String(activePage)} onValueChange={(v) => setActivePage(Number(v))}>
               <SelectTrigger className="w-40">
                 <SelectValue />
               </SelectTrigger>
@@ -181,12 +181,7 @@ export default function ExtractText() {
           </div>
 
           <OutputPanel title="Extracted text" text={visibleText} filename={filename}>
-            <Textarea
-              value={visibleText}
-              readOnly
-              rows={18}
-              className="font-mono text-xs"
-            />
+            <Textarea value={visibleText} readOnly rows={18} className="font-mono text-xs" />
           </OutputPanel>
         </>
       )}

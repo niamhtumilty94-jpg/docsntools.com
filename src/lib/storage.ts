@@ -38,11 +38,7 @@ function getSnapshot(key: string): string[] {
   if (!isBrowser()) return EMPTY;
   const fresh = read(key);
   const cached = snapshots[key];
-  if (
-    cached &&
-    cached.length === fresh.length &&
-    cached.every((v, i) => v === fresh[i])
-  ) {
+  if (cached && cached.length === fresh.length && cached.every((v, i) => v === fresh[i])) {
     return cached;
   }
   snapshots[key] = fresh;

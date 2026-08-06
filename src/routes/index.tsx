@@ -71,7 +71,6 @@ function HomePage() {
               </Link>
             ))}
           </nav>
-
         </div>
       </section>
 
@@ -122,7 +121,8 @@ function HomePage() {
               </div>
               <Button asChild variant="ghost" size="sm">
                 <Link to={cat.path}>
-                  All {TOOLS_BY_CATEGORY[cat.slug].length} <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  All {TOOLS_BY_CATEGORY[cat.slug].length}{" "}
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </Button>
             </div>
@@ -136,10 +136,7 @@ function HomePage() {
       })}
 
       {/* Why */}
-      <section
-        className="border-t border-border py-12 sm:py-16"
-        aria-labelledby="why-heading"
-      >
+      <section className="border-t border-border py-12 sm:py-16" aria-labelledby="why-heading">
         <h2 id="why-heading" className="sr-only">
           Why {SITE_NAME}
         </h2>

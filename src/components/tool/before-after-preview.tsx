@@ -106,11 +106,7 @@ function Pane({
       </figcaption>
       <div className={cn("relative flex min-h-[200px] items-center justify-center", CHECKER)}>
         {url ? (
-          <img
-            src={url}
-            alt={label}
-            className="max-h-[420px] w-auto max-w-full object-contain"
-          />
+          <img src={url} alt={label} className="max-h-[420px] w-auto max-w-full object-contain" />
         ) : (
           <div className="py-8 text-xs text-muted-foreground">No preview</div>
         )}

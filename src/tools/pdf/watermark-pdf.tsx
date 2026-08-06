@@ -195,7 +195,11 @@ export default function WatermarkPdf() {
               }}
             >
               {previewPage.thumb && (
-                <img src={previewPage.thumb} alt="" className="absolute inset-0 h-full w-full object-contain" />
+                <img
+                  src={previewPage.thumb}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-contain"
+                />
               )}
               {overlay && (
                 <span

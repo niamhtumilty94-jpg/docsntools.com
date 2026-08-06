@@ -13,9 +13,15 @@ import {
 import { useToolSettings } from "@/hooks/use-tool-settings";
 import { ToolToaster } from "@/tools/_shared/toaster";
 
-const CLASSIC = `lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit esse cillum fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum`.split(/\s+/);
+const CLASSIC =
+  `lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit esse cillum fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum`.split(
+    /\s+/,
+  );
 
-const HIPSTER = `artisan small batch single-origin pour-over chartreuse beard tote bag fixie kombucha kale chips fanny pack mustache typewriter bicycle rights vegan portland aesthetic raclette fixie jianbing chillwave gentrify kogi sustainable pop-up brunch lo-fi narwhal ennui slow-carb tilde coloring book offal four loko pickled gluten-free jean shorts neutra freegan readymade microdosing semiotics`.split(/\s+/);
+const HIPSTER =
+  `artisan small batch single-origin pour-over chartreuse beard tote bag fixie kombucha kale chips fanny pack mustache typewriter bicycle rights vegan portland aesthetic raclette fixie jianbing chillwave gentrify kogi sustainable pop-up brunch lo-fi narwhal ennui slow-carb tilde coloring book offal four loko pickled gluten-free jean shorts neutra freegan readymade microdosing semiotics`.split(
+    /\s+/,
+  );
 
 interface Settings {
   source: "classic" | "hipster" | "custom";
@@ -130,7 +136,9 @@ export default function LoremIpsumTool() {
               value={settings.source}
               onValueChange={(v) => setSettings({ source: v as Settings["source"] })}
             >
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="classic">Classic Lorem Ipsum</SelectItem>
                 <SelectItem value="hipster">Hipster Ipsum</SelectItem>
@@ -144,7 +152,9 @@ export default function LoremIpsumTool() {
               value={settings.unit}
               onValueChange={(v) => setSettings({ unit: v as Settings["unit"] })}
             >
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="paragraphs">Paragraphs</SelectItem>
                 <SelectItem value="sentences">Sentences</SelectItem>
@@ -169,7 +179,9 @@ export default function LoremIpsumTool() {
               value={settings.format}
               onValueChange={(v) => setSettings({ format: v as Settings["format"] })}
             >
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="plain">Plain text</SelectItem>
                 <SelectItem value="html">HTML &lt;p&gt;</SelectItem>
@@ -215,7 +227,8 @@ export default function LoremIpsumTool() {
           {output}
         </pre>
         <p className="mt-2 text-xs text-muted-foreground">
-          {output.length.toLocaleString()} characters · {output.split(/\s+/).filter(Boolean).length.toLocaleString()} words
+          {output.length.toLocaleString()} characters ·{" "}
+          {output.split(/\s+/).filter(Boolean).length.toLocaleString()} words
         </p>
       </OutputPanel>
       <ToolToaster />

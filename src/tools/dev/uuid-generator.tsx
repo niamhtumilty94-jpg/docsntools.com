@@ -84,12 +84,23 @@ export default function UuidGeneratorTool() {
   return (
     <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
       <section className="space-y-4 rounded-lg border border-border bg-card p-4">
-        <Tabs value={settings.version} onValueChange={(v) => setSettings({ version: v as Version })}>
+        <Tabs
+          value={settings.version}
+          onValueChange={(v) => setSettings({ version: v as Version })}
+        >
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="v1" className="text-xs">v1</TabsTrigger>
-            <TabsTrigger value="v4" className="text-xs">v4</TabsTrigger>
-            <TabsTrigger value="v5" className="text-xs">v5</TabsTrigger>
-            <TabsTrigger value="v7" className="text-xs">v7</TabsTrigger>
+            <TabsTrigger value="v1" className="text-xs">
+              v1
+            </TabsTrigger>
+            <TabsTrigger value="v4" className="text-xs">
+              v4
+            </TabsTrigger>
+            <TabsTrigger value="v5" className="text-xs">
+              v5
+            </TabsTrigger>
+            <TabsTrigger value="v7" className="text-xs">
+              v7
+            </TabsTrigger>
           </TabsList>
         </Tabs>
         <p className="text-xs text-muted-foreground">

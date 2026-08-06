@@ -6,8 +6,7 @@ export const Route = createFileRoute("/terms")({
       { title: "Terms of Service - DocnTools" },
       {
         name: "description",
-        content:
-          "Terms governing your use of DocnTools's free in-browser utility tools.",
+        content: "Terms governing your use of DocnTools's free in-browser utility tools.",
       },
     ],
   }),
@@ -26,17 +25,17 @@ function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold">1. Acceptance</h2>
           <p>
-            By using DocnTools ("the Service") you agree to these Terms. If you do not agree, do
-            not use the Service.
+            By using DocnTools ("the Service") you agree to these Terms. If you do not agree, do not
+            use the Service.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold">2. The Service</h2>
           <p>
-            DocnTools provides free, in-browser utility tools for working with PDFs, images,
-            text, and developer formats. All processing happens on your device. We do not see,
-            store, or transmit the files or text you load into the tools.
+            DocnTools provides free, in-browser utility tools for working with PDFs, images, text,
+            and developer formats. All processing happens on your device. We do not see, store, or
+            transmit the files or text you load into the tools.
           </p>
         </section>
 
@@ -66,18 +65,17 @@ function TermsPage() {
             The Service is provided <strong>"as is" and "as available"</strong> without warranties
             of any kind, express or implied. We do not warrant that the Service will be
             uninterrupted, error-free, or fit for any particular purpose. You are responsible for
-            verifying the output of any tool before relying on it, especially for legal,
-            financial, medical, or other sensitive uses.
+            verifying the output of any tool before relying on it, especially for legal, financial,
+            medical, or other sensitive uses.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold">5. Limitation of liability</h2>
           <p>
-            To the maximum extent permitted by law, DocnTools shall not be liable for any
-            indirect, incidental, consequential, or punitive damages arising out of or related to
-            your use of the Service, including loss of data, loss of profits, or business
-            interruption.
+            To the maximum extent permitted by law, DocnTools shall not be liable for any indirect,
+            incidental, consequential, or punitive damages arising out of or related to your use of
+            the Service, including loss of data, loss of profits, or business interruption.
           </p>
         </section>
 
@@ -102,14 +100,23 @@ function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold">8. Contact</h2>
           <p>
-            Questions: <a className="underline" href="mailto:hello@toolkithub.example">hello@toolkithub.example</a>
+            Questions:{" "}
+            <a className="underline" href="mailto:hello@toolkithub.example">
+              hello@toolkithub.example
+            </a>
           </p>
         </section>
 
         <section>
           <p className="text-muted-foreground">
-            See also: <Link className="underline" to="/privacy">Privacy Policy</Link> ·{" "}
-            <Link className="underline" to="/cookies">Cookies</Link>
+            See also:{" "}
+            <Link className="underline" to="/privacy">
+              Privacy Policy
+            </Link>{" "}
+            ·{" "}
+            <Link className="underline" to="/cookies">
+              Cookies
+            </Link>
           </p>
         </section>
       </div>

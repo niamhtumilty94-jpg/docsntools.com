@@ -70,7 +70,12 @@ function pickMime(source: string, choice: FormatChoice): ImageMime {
 export default function ResizeImageTool() {
   const [settings, setSettings] = useToolSettings<Settings>("resize-image", DEFAULTS);
   const [file, setFile] = useState<File | null>(null);
-  const [output, setOutput] = useState<{ blob: Blob; width: number; height: number; mime: ImageMime } | null>(null);
+  const [output, setOutput] = useState<{
+    blob: Blob;
+    width: number;
+    height: number;
+    mime: ImageMime;
+  } | null>(null);
   const [working, setWorking] = useState(false);
   const { image, error: decodeError } = useImageBitmap(file);
   useDecodeErrorToast(decodeError);
@@ -80,7 +85,7 @@ export default function ResizeImageTool() {
   // When a new image is loaded, seed dimensions
   useEffect(() => {
     if (image) setSettings({ width: image.width, height: image.height });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [image?.width, image?.height]);
 
   const computed = useMemo(() => {
@@ -97,8 +102,18 @@ export default function ResizeImageTool() {
 
   const beforeUrl = useMemo(() => (file ? URL.createObjectURL(file) : null), [file]);
   const afterUrl = useMemo(() => (output ? URL.createObjectURL(output.blob) : null), [output]);
-  useEffect(() => () => { if (beforeUrl) URL.revokeObjectURL(beforeUrl); }, [beforeUrl]);
-  useEffect(() => () => { if (afterUrl) URL.revokeObjectURL(afterUrl); }, [afterUrl]);
+  useEffect(
+    () => () => {
+      if (beforeUrl) URL.revokeObjectURL(beforeUrl);
+    },
+    [beforeUrl],
+  );
+  useEffect(
+    () => () => {
+      if (afterUrl) URL.revokeObjectURL(afterUrl);
+    },
+    [afterUrl],
+  );
 
   const timer = useRef<number | null>(null);
   useEffect(() => {
@@ -119,7 +134,9 @@ export default function ResizeImageTool() {
         setWorking(false);
       }
     }, 150);
-    return () => { if (timer.current) window.clearTimeout(timer.current); };
+    return () => {
+      if (timer.current) window.clearTimeout(timer.current);
+    };
   }, [file, image, computed.width, computed.height, settings.format, settings.quality]);
 
   const onChangeWidth = (v: number) => {
@@ -143,7 +160,8 @@ export default function ResizeImageTool() {
     ? `${file.name.replace(/\.[^.]+$/, "")}-${computed.width}x${computed.height}.${output ? FORMAT_EXT[output.mime] : "jpg"}`
     : "resized.jpg";
 
-  const lossy = settings.format !== "image/png" && (settings.format !== "keep" || file?.type !== "image/png");
+  const lossy =
+    settings.format !== "image/png" && (settings.format !== "keep" || file?.type !== "image/png");
 
   return (
     <div className="space-y-5">
@@ -156,7 +174,13 @@ export default function ResizeImageTool() {
       </div>
 
       <div ref={dropRef}>
-        <ImageDropArea file={file} onFile={setFile} width={image?.width} height={image?.height} disabled={working} />
+        <ImageDropArea
+          file={file}
+          onFile={setFile}
+          width={image?.width}
+          height={image?.height}
+          disabled={working}
+        />
       </div>
 
       <Tabs value={settings.mode} onValueChange={(v) => setSettings({ mode: v as Mode })}>
@@ -199,7 +223,13 @@ export default function ResizeImageTool() {
           </div>
           <div className="flex flex-wrap items-end gap-1.5">
             {PRESETS_WIDTH.map((w) => (
-              <Button key={w} type="button" size="sm" variant="outline" onClick={() => onChangeWidth(w)}>
+              <Button
+                key={w}
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={() => onChangeWidth(w)}
+              >
                 {w}w
               </Button>
             ))}
@@ -220,7 +250,13 @@ export default function ResizeImageTool() {
           />
           <div className="flex flex-wrap gap-1.5">
             {PRESETS_PERCENT.map((p) => (
-              <Button key={p} type="button" size="sm" variant="outline" onClick={() => setSettings({ percent: p })}>
+              <Button
+                key={p}
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={() => setSettings({ percent: p })}
+              >
                 {p}%
               </Button>
             ))}
@@ -231,7 +267,10 @@ export default function ResizeImageTool() {
       <div className="grid gap-3 rounded-lg border border-border bg-muted/20 p-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label>Output format</Label>
-          <Select value={settings.format} onValueChange={(v) => setSettings({ format: v as FormatChoice })}>
+          <Select
+            value={settings.format}
+            onValueChange={(v) => setSettings({ format: v as FormatChoice })}
+          >
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
@@ -263,7 +302,9 @@ export default function ResizeImageTool() {
 
       <p className="text-xs text-muted-foreground">
         Browsers resample with high-quality bicubic interpolation. Output target:{" "}
-        <span className="font-mono">{computed.width}×{computed.height}</span>
+        <span className="font-mono">
+          {computed.width}×{computed.height}
+        </span>
       </p>
 
       <OutputPanel title="Result" blob={output?.blob} filename={downloadName}>
@@ -280,7 +321,9 @@ export default function ResizeImageTool() {
             beforeBytes={file?.size}
             afterBytes={output?.blob.size}
             beforeLabel={`Original · ${image?.width ?? "?"}×${image?.height ?? "?"}`}
-            afterLabel={output ? `${FORMAT_LABEL[output.mime]} · ${output.width}×${output.height}` : "Result"}
+            afterLabel={
+              output ? `${FORMAT_LABEL[output.mime]} · ${output.width}×${output.height}` : "Result"
+            }
           />
         )}
       </OutputPanel>

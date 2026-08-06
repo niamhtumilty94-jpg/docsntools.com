@@ -151,10 +151,7 @@ export default function TextDiffTool() {
         );
       } else {
         right.push(
-          <span
-            key={`r${i}`}
-            className="bg-[color:var(--success)]/25 text-[color:var(--success)]"
-          >
+          <span key={`r${i}`} className="bg-[color:var(--success)]/25 text-[color:var(--success)]">
             {text}
           </span>,
         );
@@ -185,7 +182,12 @@ export default function TextDiffTool() {
             <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Original
             </h3>
-            <SampleDataButton onLoad={() => { setA(SAMPLE_A); setB(SAMPLE_B); }} />
+            <SampleDataButton
+              onLoad={() => {
+                setA(SAMPLE_A);
+                setB(SAMPLE_B);
+              }}
+            />
           </div>
           <Textarea
             value={a}
@@ -219,7 +221,9 @@ export default function TextDiffTool() {
               value={settings.granularity}
               onValueChange={(v) => setSettings({ granularity: v as Granularity })}
             >
-              <SelectTrigger className="h-8 w-32"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="h-8 w-32">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="char">Character</SelectItem>
                 <SelectItem value="word">Word</SelectItem>

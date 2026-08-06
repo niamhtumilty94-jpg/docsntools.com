@@ -6,8 +6,8 @@ export default function Placeholder() {
       <Wrench className="h-8 w-8 text-muted-foreground" />
       <div className="text-sm font-medium">This tool is coming soon</div>
       <div className="max-w-md text-xs text-muted-foreground">
-        We're building this out. In the meantime, browse the other tools - they all run
-        completely in your browser.
+        We're building this out. In the meantime, browse the other tools - they all run completely
+        in your browser.
       </div>
     </div>
   );

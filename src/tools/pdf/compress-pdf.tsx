@@ -49,8 +49,8 @@ export default function CompressPdf() {
           <div className="rounded-lg border border-border bg-muted/20 p-4 text-sm">
             <p className="font-medium">Optimize structure (lossless)</p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Drops metadata and re-saves with object streams. Best for PDFs with bloated
-              metadata; no effect on already-optimized files (original is kept if no savings).
+              Drops metadata and re-saves with object streams. Best for PDFs with bloated metadata;
+              no effect on already-optimized files (original is kept if no savings).
             </p>
           </div>
 
@@ -85,10 +85,7 @@ export default function CompressPdf() {
                 size="sm"
                 className="mt-3"
                 onClick={() =>
-                  downloadBlob(
-                    result.blob,
-                    file.name.replace(/\.pdf$/i, "") + "-compressed.pdf",
-                  )
+                  downloadBlob(result.blob, file.name.replace(/\.pdf$/i, "") + "-compressed.pdf")
                 }
               >
                 Download compressed PDF

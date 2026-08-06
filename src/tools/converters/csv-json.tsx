@@ -78,8 +78,7 @@ export default function CsvJsonTool() {
   }, [share.initial]);
 
   const result = useMemo<
-    | { ok: true; output: string; rows: number; warning?: string }
-    | { ok: false; error: string }
+    { ok: true; output: string; rows: number; warning?: string } | { ok: false; error: string }
   >(() => {
     try {
       if (settings.direction === "csv2json") {
@@ -184,7 +183,9 @@ export default function CsvJsonTool() {
                 value={settings.delimiter}
                 onValueChange={(v) => setSettings({ delimiter: v })}
               >
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="auto">Auto-detect</SelectItem>
                   <SelectItem value=",">Comma ,</SelectItem>
@@ -202,7 +203,9 @@ export default function CsvJsonTool() {
                   min={0}
                   max={8}
                   value={settings.indent}
-                  onChange={(e) => setSettings({ indent: Math.max(0, Number(e.target.value) || 0) })}
+                  onChange={(e) =>
+                    setSettings({ indent: Math.max(0, Number(e.target.value) || 0) })
+                  }
                 />
               </div>
             )}

@@ -74,8 +74,7 @@ export default function UrlEncoderTool() {
 
   const updateParam = (i: number, patch: Partial<{ k: string; v: string }>) =>
     setParamsDraft((arr) => arr.map((p, idx) => (idx === i ? { ...p, ...patch } : p)));
-  const removeParam = (i: number) =>
-    setParamsDraft((arr) => arr.filter((_, idx) => idx !== i));
+  const removeParam = (i: number) => setParamsDraft((arr) => arr.filter((_, idx) => idx !== i));
   const addParam = () => setParamsDraft((arr) => [...arr, { k: "", v: "" }]);
 
   const shareUrl = share.getShareUrl({ text, mode: settings.mode });
@@ -91,10 +90,7 @@ export default function UrlEncoderTool() {
             <SampleDataButton onLoad={() => setText(SAMPLE)} />
           </header>
           <div className="flex flex-wrap items-center gap-1.5">
-            <Tabs
-              value={settings.mode}
-              onValueChange={(v) => setSettings({ mode: v as Mode })}
-            >
+            <Tabs value={settings.mode} onValueChange={(v) => setSettings({ mode: v as Mode })}>
               <TabsList className="h-7">
                 <TabsTrigger value="encode" className="text-[11px]">
                   Encode URI
@@ -107,12 +103,7 @@ export default function UrlEncoderTool() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setText(output)}
-              aria-label="Swap"
-            >
+            <Button size="sm" variant="ghost" onClick={() => setText(output)} aria-label="Swap">
               <ArrowLeftRight className="h-4 w-4" />
             </Button>
           </div>
@@ -125,12 +116,7 @@ export default function UrlEncoderTool() {
           />
         </section>
 
-        <OutputPanel
-          title="Output"
-          text={output}
-          filename="output.txt"
-          shareUrl={shareUrl}
-        >
+        <OutputPanel title="Output" text={output} filename="output.txt" shareUrl={shareUrl}>
           <pre className="max-h-[260px] overflow-auto rounded-md border border-border bg-muted/30 p-3 font-mono text-xs">
             {output || "-"}
           </pre>

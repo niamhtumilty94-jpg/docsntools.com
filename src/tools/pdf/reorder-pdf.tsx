@@ -101,9 +101,7 @@ export default function ReorderPdf() {
           });
         return next;
       });
-      toast.success(
-        last.length === 1 ? "Restored 1 page" : `Restored ${last.length} pages`,
-      );
+      toast.success(last.length === 1 ? "Restored 1 page" : `Restored ${last.length} pages`);
       return cur.slice(0, -1);
     });
   };
@@ -128,8 +126,8 @@ export default function ReorderPdf() {
     () => (
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-xs text-muted-foreground">
-          {pages.length} page{pages.length === 1 ? "" : "s"} · drag to reorder · click to
-          select · shift-click for range
+          {pages.length} page{pages.length === 1 ? "" : "s"} · drag to reorder · click to select ·
+          shift-click for range
         </span>
         <div className="flex gap-2">
           {history.length > 0 && (

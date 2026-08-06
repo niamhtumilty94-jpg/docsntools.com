@@ -26,8 +26,8 @@ function CookiesPage() {
         <section>
           <h2 className="text-xl font-semibold">Short version</h2>
           <p>
-            <strong>DocnTools does not set tracking cookies.</strong> That is why you do not see
-            a cookie consent banner - there is nothing to consent to.
+            <strong>DocnTools does not set tracking cookies.</strong> That is why you do not see a
+            cookie consent banner - there is nothing to consent to.
           </p>
         </section>
 
@@ -37,8 +37,8 @@ function CookiesPage() {
             <li>
               <strong>Analytics (Umami Cloud)</strong> - cookieless. Umami counts anonymous
               pageviews using a hashed, daily-rotating identifier that cannot be tied back to a
-              specific person. This is recognised by EU data-protection regulators as not
-              requiring consent.
+              specific person. This is recognised by EU data-protection regulators as not requiring
+              consent.
             </li>
             <li>
               <strong>Theme preference</strong> - stored in your browser's <code>localStorage</code>{" "}
@@ -56,8 +56,8 @@ function CookiesPage() {
           <h2 className="text-xl font-semibold">Third parties</h2>
           <ul className="list-disc space-y-3 pl-6">
             <li>
-              <strong>Google Fonts</strong> - loads webfonts from Google's CDN. Google may log
-              the request (browser, IP, font name). No cookies are set by Google Fonts.
+              <strong>Google Fonts</strong> - loads webfonts from Google's CDN. Google may log the
+              request (browser, IP, font name). No cookies are set by Google Fonts.
             </li>
             <li>
               <strong>Ko-fi</strong> - only loaded when you click "Support on Ko-fi", which opens
@@ -65,9 +65,9 @@ function CookiesPage() {
             </li>
           </ul>
           <p className="text-muted-foreground">
-            When billing launches, Stripe will set cookies on the checkout page (their own
-            domain) for fraud prevention. Those cookies are governed by Stripe's cookie policy
-            and only apply during checkout.
+            When billing launches, Stripe will set cookies on the checkout page (their own domain)
+            for fraud prevention. Those cookies are governed by Stripe's cookie policy and only
+            apply during checkout.
           </p>
         </section>
 
@@ -75,15 +75,21 @@ function CookiesPage() {
           <h2 className="text-xl font-semibold">Clearing local storage</h2>
           <p>
             You can clear the small amount of data we keep in your browser at any time via your
-            browser's "Clear site data" or "Clear local storage" controls. Doing so will reset
-            your theme preference and remove your pinned/recent tools list.
+            browser's "Clear site data" or "Clear local storage" controls. Doing so will reset your
+            theme preference and remove your pinned/recent tools list.
           </p>
         </section>
 
         <section>
           <p className="text-muted-foreground">
-            See also: <Link className="underline" to="/privacy">Privacy Policy</Link> ·{" "}
-            <Link className="underline" to="/terms">Terms of Service</Link>
+            See also:{" "}
+            <Link className="underline" to="/privacy">
+              Privacy Policy
+            </Link>{" "}
+            ·{" "}
+            <Link className="underline" to="/terms">
+              Terms of Service
+            </Link>
           </p>
         </section>
       </div>

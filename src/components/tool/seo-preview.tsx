@@ -54,10 +54,7 @@ export function SeoPreview({ tool }: SeoPreviewProps) {
           </span>
         </div>
         <ChevronDown
-          className={cn(
-            "h-4 w-4 text-muted-foreground transition-transform",
-            open && "rotate-180",
-          )}
+          className={cn("h-4 w-4 text-muted-foreground transition-transform", open && "rotate-180")}
           aria-hidden="true"
         />
       </button>
@@ -70,9 +67,7 @@ export function SeoPreview({ tool }: SeoPreviewProps) {
             <div className="mt-1 truncate text-lg text-blue-700 dark:text-blue-400">
               {seo.title}
             </div>
-            <div className="mt-1 text-sm leading-snug text-muted-foreground">
-              {seo.description}
-            </div>
+            <div className="mt-1 text-sm leading-snug text-muted-foreground">{seo.description}</div>
           </div>
 
           {/* Field details */}

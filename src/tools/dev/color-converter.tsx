@@ -36,11 +36,9 @@ function buildPalette(hex: string): string[] {
   const c = colord(hex);
   // Tailwind-style 50..950 by mixing toward white/black.
   const stops = [0.95, 0.85, 0.7, 0.55, 0.4, 0.25, 0.15, 0.07, -0.07, -0.2, -0.35];
-  return stops.map((stop) =>
-    stop > 0
-      ? c.mix("#ffffff", stop).toHex()
-      : c.mix("#000000", -stop).toHex(),
-  ).slice(0, PALETTE_STEPS);
+  return stops
+    .map((stop) => (stop > 0 ? c.mix("#ffffff", stop).toHex() : c.mix("#000000", -stop).toHex()))
+    .slice(0, PALETTE_STEPS);
 }
 
 export default function ColorConverterTool() {
@@ -75,11 +73,20 @@ export default function ColorConverterTool() {
       { label: "HEX (8-digit)", value: c.alpha(rgb.a ?? 1).toHex() },
       { label: "RGB", value: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` },
       { label: "RGBA", value: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a ?? 1})` },
-      { label: "HSL", value: `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)` },
-      { label: "HWB", value: `hwb(${Math.round(hwb.h)} ${Math.round(hwb.w)}% ${Math.round(hwb.b)}%)` },
+      {
+        label: "HSL",
+        value: `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`,
+      },
+      {
+        label: "HWB",
+        value: `hwb(${Math.round(hwb.h)} ${Math.round(hwb.w)}% ${Math.round(hwb.b)}%)`,
+      },
       { label: "LAB", value: `lab(${lab.l.toFixed(1)}% ${lab.a.toFixed(1)} ${lab.b.toFixed(1)})` },
       { label: "LCH", value: `lch(${lch.l.toFixed(1)}% ${lch.c.toFixed(1)} ${lch.h.toFixed(1)})` },
-      { label: "CMYK", value: `cmyk(${Math.round(cmyk.c)}%, ${Math.round(cmyk.m)}%, ${Math.round(cmyk.y)}%, ${Math.round(cmyk.k)}%)` },
+      {
+        label: "CMYK",
+        value: `cmyk(${Math.round(cmyk.c)}%, ${Math.round(cmyk.m)}%, ${Math.round(cmyk.y)}%, ${Math.round(cmyk.k)}%)`,
+      },
       { label: "Name", value: c.toName({ closest: true }) ?? "-" },
     ];
   }, [c, isValid]);
@@ -100,7 +107,9 @@ export default function ColorConverterTool() {
 
   const eyedropper = async () => {
     // EyeDropper API is Chrome/Edge only.
-    const w = window as unknown as { EyeDropper?: new () => { open: () => Promise<{ sRGBHex: string }> } };
+    const w = window as unknown as {
+      EyeDropper?: new () => { open: () => Promise<{ sRGBHex: string }> };
+    };
     if (!w.EyeDropper) {
       toast.error("EyeDropper not supported in this browser");
       return;
@@ -144,9 +153,7 @@ export default function ColorConverterTool() {
               <Pipette className="h-4 w-4" />
             </Button>
           </div>
-          {!isValid && (
-            <p className="text-xs text-destructive">Not a valid color.</p>
-          )}
+          {!isValid && <p className="text-xs text-destructive">Not a valid color.</p>}
         </div>
 
         <div className="space-y-1.5">
@@ -190,10 +197,7 @@ export default function ColorConverterTool() {
             className="rounded-md border border-border p-4"
             style={{ backgroundColor: settings.bgColor }}
           >
-            <p
-              className="text-base font-medium"
-              style={{ color: isValid ? c.toHex() : "inherit" }}
-            >
+            <p className="text-base font-medium" style={{ color: isValid ? c.toHex() : "inherit" }}>
               The quick brown fox.
             </p>
             <p className="text-xs" style={{ color: isValid ? c.toHex() : "inherit" }}>

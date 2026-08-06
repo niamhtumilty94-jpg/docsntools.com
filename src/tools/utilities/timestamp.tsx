@@ -28,7 +28,16 @@ function getTimeZones(): string[] {
     if (list && list.length) return list;
     throw new Error("not supported");
   } catch {
-    return ["UTC", "America/New_York", "America/Los_Angeles", "Europe/London", "Europe/Berlin", "Asia/Tokyo", "Asia/Shanghai", "Australia/Sydney"];
+    return [
+      "UTC",
+      "America/New_York",
+      "America/Los_Angeles",
+      "Europe/London",
+      "Europe/Berlin",
+      "Asia/Tokyo",
+      "Asia/Shanghai",
+      "Australia/Sydney",
+    ];
   }
 }
 
@@ -148,7 +157,6 @@ function partsToDate(
   return new Date(guess - offset * 60_000);
 }
 
-
 export default function TimestampConverter() {
   const mounted = useMounted();
   const [mode, setMode] = useState<Mode>("single");
@@ -223,14 +231,10 @@ export default function TimestampConverter() {
   return (
     <div className="space-y-6">
       <div className="rounded-lg border border-border bg-card p-4">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">
-          Current time
-        </div>
+        <div className="text-xs uppercase tracking-wider text-muted-foreground">Current time</div>
         <div className="mt-1 flex flex-wrap items-baseline gap-x-4 gap-y-1">
           <span className="font-mono text-2xl">{Math.floor(now / 1000)}</span>
-          <span className="text-sm text-muted-foreground">
-            {formatInTz(new Date(now), tz)}
-          </span>
+          <span className="text-sm text-muted-foreground">{formatInTz(new Date(now), tz)}</span>
           {isDST(new Date(now), tz) && (
             <span className="rounded-full border border-border bg-muted px-2 py-0.5 text-xs text-muted-foreground">
               DST
@@ -320,7 +324,10 @@ export default function TimestampConverter() {
                   const [min, max] = limits[k];
                   return (
                     <div key={k} className="space-y-1">
-                      <Label htmlFor={`ts-${k}`} className="text-xs capitalize text-muted-foreground">
+                      <Label
+                        htmlFor={`ts-${k}`}
+                        className="text-xs capitalize text-muted-foreground"
+                      >
                         {k}
                       </Label>
                       <Input
@@ -334,7 +341,9 @@ export default function TimestampConverter() {
                           if (isNaN(v)) return;
                           const next = { ...parts, [k]: v };
                           const d = partsToDate(next, tz);
-                          setInput(String(unit === "s" ? Math.floor(d.getTime() / 1000) : d.getTime()));
+                          setInput(
+                            String(unit === "s" ? Math.floor(d.getTime() / 1000) : d.getTime()),
+                          );
                         }}
                         className="font-mono"
                       />
@@ -344,7 +353,6 @@ export default function TimestampConverter() {
               </div>
             </div>
           )}
-
 
           {date ? (
             <div className="overflow-hidden rounded-lg border border-border">

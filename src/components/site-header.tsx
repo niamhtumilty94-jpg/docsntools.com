@@ -12,7 +12,11 @@ export function SiteHeader() {
         Skip to main content
       </a>
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2 font-semibold" aria-label={`${SITE_NAME} home`}>
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-semibold"
+          aria-label={`${SITE_NAME} home`}
+        >
           <Wrench className="h-4 w-4 text-primary" aria-hidden="true" />
           <span className="text-sm tracking-tight">
             {SITE_NAME}

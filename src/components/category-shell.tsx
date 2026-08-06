@@ -13,12 +13,7 @@ import {
   subscribeStorage,
   toggleFavorite,
 } from "@/lib/storage";
-import {
-  CATEGORY_BY_SLUG,
-  TOOLS_BY_CATEGORY,
-  getRelatedTools,
-  type Tool,
-} from "@/lib/tools";
+import { CATEGORY_BY_SLUG, TOOLS_BY_CATEGORY, getRelatedTools, type Tool } from "@/lib/tools";
 
 const categoryAccent: Record<Tool["category"], string> = {
   pdf: "text-[color:var(--cat-pdf)]",
@@ -104,9 +99,7 @@ export function CategoryShell({ tool, children }: CategoryShellProps) {
                         <t.icon
                           className={cn(
                             "mt-0.5 h-4 w-4 shrink-0",
-                            active
-                              ? categoryAccent[t.category]
-                              : "text-muted-foreground",
+                            active ? categoryAccent[t.category] : "text-muted-foreground",
                           )}
                           aria-hidden="true"
                         />
@@ -174,10 +167,7 @@ export function CategoryShell({ tool, children }: CategoryShellProps) {
           )}
 
           {/* Tool UI */}
-          <main
-            id="main-content"
-            className="rounded-lg border border-border bg-card p-5 sm:p-6"
-          >
+          <main id="main-content" className="rounded-lg border border-border bg-card p-5 sm:p-6">
             {children}
           </main>
 
@@ -219,16 +209,12 @@ export function CategoryShell({ tool, children }: CategoryShellProps) {
                 {tool.faq.map((f, i) => (
                   <div key={i}>
                     <div className="text-sm font-semibold">{f.q}</div>
-                    <div className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {f.a}
-                    </div>
+                    <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{f.a}</div>
                   </div>
                 ))}
               </div>
             </section>
           </div>
-
-          
 
           {related.length > 0 && (
             <section

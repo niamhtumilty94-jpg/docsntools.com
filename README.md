@@ -35,11 +35,11 @@ Set `VITE_SITE_URL` to your production domain before building so canonical URLs,
 
 Copy `.env.example` to `.env` and adjust:
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_SITE_URL` | Canonical origin (e.g. `https://docsntool.com`) |
-| `VITE_UMAMI_WEBSITE_ID` | Optional Umami site ID |
-| `VITE_UMAMI_SRC` | Optional Umami script URL |
+| Variable                | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `VITE_SITE_URL`         | Canonical origin (e.g. `https://docsntool.com`) |
+| `VITE_UMAMI_WEBSITE_ID` | Optional Umami site ID                          |
+| `VITE_UMAMI_SRC`        | Optional Umami script URL                       |
 
 ## Tools
 

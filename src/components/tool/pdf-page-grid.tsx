@@ -114,8 +114,9 @@ export function PdfPageGrid({
 }
 
 function SortablePageCard(props: PageCardProps) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: props.page.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: props.page.id,
+  });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,

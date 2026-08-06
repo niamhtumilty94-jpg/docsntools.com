@@ -29,14 +29,10 @@ export default function RotatePdf() {
 
   const rotateOne = (id: string) =>
     setPages((cur) =>
-      cur.map((p) =>
-        p.id === id ? { ...p, rotation: ((p.rotation ?? 0) + 90) % 360 } : p,
-      ),
+      cur.map((p) => (p.id === id ? { ...p, rotation: ((p.rotation ?? 0) + 90) % 360 } : p)),
     );
   const rotateAll = (deg: number) =>
-    setPages((cur) =>
-      cur.map((p) => ({ ...p, rotation: ((p.rotation ?? 0) + deg) % 360 })),
-    );
+    setPages((cur) => cur.map((p) => ({ ...p, rotation: ((p.rotation ?? 0) + deg) % 360 })));
 
   const save = async () => {
     if (!file) return;

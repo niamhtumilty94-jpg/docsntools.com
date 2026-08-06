@@ -65,8 +65,7 @@ export function CommandMenu() {
             <p className="text-sm">No tools found.</p>
             <p className="text-xs text-muted-foreground">
               Try keywords like <code className="font-mono">compress</code>,{" "}
-              <code className="font-mono">qr</code>, or{" "}
-              <code className="font-mono">regex</code>.
+              <code className="font-mono">qr</code>, or <code className="font-mono">regex</code>.
             </p>
           </div>
         </CommandEmpty>

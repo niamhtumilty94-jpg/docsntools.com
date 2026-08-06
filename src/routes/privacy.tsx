@@ -26,10 +26,10 @@ function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold">The short version</h2>
           <p>
-            Every tool on DocnTools runs <strong>entirely in your browser</strong>. Your
-            documents, images, text, and any other content you load into a tool are processed
-            locally on your device and are <strong>never uploaded</strong> to our servers or to
-            any third party. We have no way to see them.
+            Every tool on DocnTools runs <strong>entirely in your browser</strong>. Your documents,
+            images, text, and any other content you load into a tool are processed locally on your
+            device and are <strong>never uploaded</strong> to our servers or to any third party. We
+            have no way to see them.
           </p>
           <p>
             We use cookieless analytics (Umami) to count anonymous pageviews. We do not run ad
@@ -46,12 +46,12 @@ function PrivacyPage() {
               identifiers. This is the bar the EU regulator considers consent-free.
             </li>
             <li>
-              <strong>Theme preference</strong> stored in your browser's localStorage. This
-              never leaves your device and is not a cookie.
+              <strong>Theme preference</strong> stored in your browser's localStorage. This never
+              leaves your device and is not a cookie.
             </li>
             <li>
-              <strong>Recently used tools and pinned favorites</strong> stored in localStorage,
-              so the homepage can show them. Local to your browser.
+              <strong>Recently used tools and pinned favorites</strong> stored in localStorage, so
+              the homepage can show them. Local to your browser.
             </li>
           </ul>
         </section>
@@ -80,8 +80,8 @@ function PrivacyPage() {
               <strong>Google Fonts</strong> - webfont delivery for Inter and JetBrains Mono.
             </li>
             <li>
-              <strong>Ko-fi</strong> - only when you click the "Support on Ko-fi" link, which
-              opens their site in a new tab.
+              <strong>Ko-fi</strong> - only when you click the "Support on Ko-fi" link, which opens
+              their site in a new tab.
             </li>
           </ul>
           <p className="text-muted-foreground">
@@ -116,8 +116,14 @@ function PrivacyPage() {
 
         <section>
           <p className="text-muted-foreground">
-            See also: <Link className="underline" to="/cookies">Cookies</Link> ·{" "}
-            <Link className="underline" to="/terms">Terms of Service</Link>
+            See also:{" "}
+            <Link className="underline" to="/cookies">
+              Cookies
+            </Link>{" "}
+            ·{" "}
+            <Link className="underline" to="/terms">
+              Terms of Service
+            </Link>
           </p>
         </section>
       </div>

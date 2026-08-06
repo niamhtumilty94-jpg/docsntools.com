@@ -218,12 +218,7 @@ export default function ImageBase64Tool() {
                 <Loader2 className="h-4 w-4 animate-spin" /> Encoding…
               </div>
             ) : encodedOutput ? (
-              <Textarea
-                readOnly
-                value={encodedOutput}
-                rows={10}
-                className="font-mono text-xs"
-              />
+              <Textarea readOnly value={encodedOutput} rows={10} className="font-mono text-xs" />
             ) : (
               <p className="text-sm text-muted-foreground">No output yet.</p>
             )}
@@ -240,9 +235,7 @@ export default function ImageBase64Tool() {
               placeholder="data:image/png;base64,iVBORw0KGgoAAAANS..."
               className="font-mono text-xs"
             />
-            {decodeError && (
-              <p className="text-xs text-destructive">{decodeError}</p>
-            )}
+            {decodeError && <p className="text-xs text-destructive">{decodeError}</p>}
           </div>
 
           {!detectMime(decodeInput) && decodeInput.trim() && (
@@ -266,9 +259,7 @@ export default function ImageBase64Tool() {
                 <Button
                   size="sm"
                   variant="ghost"
-                  onClick={() =>
-                    downloadBlob(decoded.blob, `decoded.${decodedExt}`)
-                  }
+                  onClick={() => downloadBlob(decoded.blob, `decoded.${decodedExt}`)}
                 >
                   Download .{decodedExt}
                 </Button>

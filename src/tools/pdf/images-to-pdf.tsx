@@ -281,11 +281,7 @@ export default function ImagesToPdf() {
               </div>
             </div>
 
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={onDragEnd}
-            >
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
               <SortableContext items={items.map((i) => i.id)} strategy={rectSortingStrategy}>
                 <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
                   {items.map((it, i) => (
@@ -357,8 +353,9 @@ function SortableImageCard({
   index: number;
   onRemove: () => void;
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: item.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: item.id,
+  });
   return (
     <div
       ref={setNodeRef}
@@ -385,11 +382,7 @@ function SortableImageCard({
       >
         <X className="h-3.5 w-3.5" />
       </button>
-      <img
-        src={item.preview}
-        alt=""
-        className="block h-28 w-full rounded object-contain"
-      />
+      <img src={item.preview} alt="" className="block h-28 w-full rounded object-contain" />
       <div className="mt-1 text-center font-mono text-[10px] text-muted-foreground">
         {index} · {item.width}×{item.height}
       </div>

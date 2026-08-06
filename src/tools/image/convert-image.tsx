@@ -60,15 +60,27 @@ export default function ConvertImageTool() {
   // If saved target is unsupported, fall back to webp/jpeg.
   useEffect(() => {
     if (!supportedTargets.includes(settings.target)) {
-      setSettings({ target: supportedTargets.includes("image/webp") ? "image/webp" : "image/jpeg" });
+      setSettings({
+        target: supportedTargets.includes("image/webp") ? "image/webp" : "image/jpeg",
+      });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supportedTargets.join(",")]);
 
   const beforeUrl = useMemo(() => (file ? URL.createObjectURL(file) : null), [file]);
   const afterUrl = useMemo(() => (output ? URL.createObjectURL(output.blob) : null), [output]);
-  useEffect(() => () => { if (beforeUrl) URL.revokeObjectURL(beforeUrl); }, [beforeUrl]);
-  useEffect(() => () => { if (afterUrl) URL.revokeObjectURL(afterUrl); }, [afterUrl]);
+  useEffect(
+    () => () => {
+      if (beforeUrl) URL.revokeObjectURL(beforeUrl);
+    },
+    [beforeUrl],
+  );
+  useEffect(
+    () => () => {
+      if (afterUrl) URL.revokeObjectURL(afterUrl);
+    },
+    [afterUrl],
+  );
 
   const lossy = settings.target !== "image/png";
   const needsBg = settings.target === "image/jpeg";
@@ -91,7 +103,9 @@ export default function ConvertImageTool() {
         setWorking(false);
       }
     }, 150);
-    return () => { if (timer.current) window.clearTimeout(timer.current); };
+    return () => {
+      if (timer.current) window.clearTimeout(timer.current);
+    };
   }, [file, image, settings.target, settings.quality, settings.background, needsBg]);
 
   const downloadName = file
@@ -109,25 +123,38 @@ export default function ConvertImageTool() {
       </div>
 
       <div ref={dropRef}>
-        <ImageDropArea file={file} onFile={setFile} width={image?.width} height={image?.height} disabled={working} />
+        <ImageDropArea
+          file={file}
+          onFile={setFile}
+          width={image?.width}
+          height={image?.height}
+          disabled={working}
+        />
       </div>
 
       <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label>Source</Label>
           <Input
-            value={file ? FORMAT_LABEL[(file.type as ImageMime)] ?? file.type : "-"}
+            value={file ? (FORMAT_LABEL[file.type as ImageMime] ?? file.type) : "-"}
             readOnly
             className="font-mono"
           />
         </div>
         <div className="space-y-1.5">
           <Label>Target format</Label>
-          <Select value={settings.target} onValueChange={(v) => setSettings({ target: v as ImageMime })}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+          <Select
+            value={settings.target}
+            onValueChange={(v) => setSettings({ target: v as ImageMime })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
             <SelectContent>
               {supportedTargets.map((m) => (
-                <SelectItem key={m} value={m}>{FORMAT_LABEL[m]}</SelectItem>
+                <SelectItem key={m} value={m}>
+                  {FORMAT_LABEL[m]}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -186,7 +213,7 @@ export default function ConvertImageTool() {
             afterUrl={afterUrl}
             beforeBytes={file?.size}
             afterBytes={output?.blob.size}
-            beforeLabel={`${FORMAT_LABEL[(file?.type as ImageMime)] ?? "Source"} · ${image?.width ?? "?"}×${image?.height ?? "?"}`}
+            beforeLabel={`${FORMAT_LABEL[file?.type as ImageMime] ?? "Source"} · ${image?.width ?? "?"}×${image?.height ?? "?"}`}
             afterLabel={output ? `${FORMAT_LABEL[output.mime]}` : "Result"}
           />
         )}

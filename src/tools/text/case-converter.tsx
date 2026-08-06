@@ -97,9 +97,7 @@ export default function CaseConverterTool() {
           className="min-h-[220px] resize-y"
           placeholder="Paste any text…"
         />
-        <p className="text-xs text-muted-foreground">
-          {input.length.toLocaleString()} characters
-        </p>
+        <p className="text-xs text-muted-foreground">{input.length.toLocaleString()} characters</p>
       </section>
 
       <OutputPanel

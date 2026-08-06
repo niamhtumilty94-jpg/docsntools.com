@@ -280,7 +280,11 @@ export default function HashGeneratorTool() {
             <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Hashes
             </h3>
-            <Button size="sm" variant="ghost" onClick={() => copyToClipboard(shareUrl, "Share link copied")}>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => copyToClipboard(shareUrl, "Share link copied")}
+            >
               Share
             </Button>
           </header>

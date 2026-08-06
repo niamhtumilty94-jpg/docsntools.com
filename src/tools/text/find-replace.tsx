@@ -99,10 +99,7 @@ export default function FindReplaceTool() {
       const start = m.index ?? 0;
       if (start > last) out.push(input.slice(last, start));
       out.push(
-        <mark
-          key={i++}
-          className="rounded-sm bg-[color:var(--success)]/30 px-0.5 text-foreground"
-        >
+        <mark key={i++} className="rounded-sm bg-[color:var(--success)]/30 px-0.5 text-foreground">
           {m[0]}
         </mark>,
       );
@@ -138,7 +135,9 @@ export default function FindReplaceTool() {
           </header>
           <div className="grid gap-2 sm:grid-cols-2">
             <div>
-              <Label htmlFor="find" className="text-xs">Find</Label>
+              <Label htmlFor="find" className="text-xs">
+                Find
+              </Label>
               <Input
                 id="find"
                 value={find}
@@ -181,9 +180,7 @@ export default function FindReplaceTool() {
           />
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <span className="text-muted-foreground">{matchCount} matches</span>
-            {compiled && !compiled.ok && (
-              <span className="text-destructive">{compiled.error}</span>
-            )}
+            {compiled && !compiled.ok && <span className="text-destructive">{compiled.error}</span>}
           </div>
           <div>
             <h4 className="mb-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">

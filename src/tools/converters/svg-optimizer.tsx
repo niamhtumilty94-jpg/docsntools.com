@@ -163,7 +163,9 @@ export default function SvgOptimizerTool() {
                 value={settings.preset}
                 onValueChange={(v) => setSettings({ preset: v as Preset })}
               >
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="safe">Safe (preserve structure)</SelectItem>
                   <SelectItem value="default">Default</SelectItem>

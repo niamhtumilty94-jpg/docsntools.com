@@ -13,13 +13,15 @@ import { deflateSync, inflateSync, strFromU8, strToU8 } from "fflate";
 function toBase64Url(bytes: Uint8Array): string {
   let bin = "";
   for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
-  const b64 = typeof btoa !== "undefined" ? btoa(bin) : Buffer.from(bin, "binary").toString("base64");
+  const b64 =
+    typeof btoa !== "undefined" ? btoa(bin) : Buffer.from(bin, "binary").toString("base64");
   return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
 function fromBase64Url(s: string): Uint8Array {
   const b64 = s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4);
-  const bin = typeof atob !== "undefined" ? atob(b64) : Buffer.from(b64, "base64").toString("binary");
+  const bin =
+    typeof atob !== "undefined" ? atob(b64) : Buffer.from(b64, "base64").toString("binary");
   const out = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
@@ -64,9 +66,7 @@ interface UseShareableStateResult<T> {
   writeHash: (state: T) => void;
 }
 
-export function useShareableState<T>(
-  paramKey = "s",
-): UseShareableStateResult<T> {
+export function useShareableState<T>(paramKey = "s"): UseShareableStateResult<T> {
   // Read once on mount so we don't trigger re-decodes during typing.
   const initialRef = useRef<T | null>(null);
   const [ready, setReady] = useState(false);

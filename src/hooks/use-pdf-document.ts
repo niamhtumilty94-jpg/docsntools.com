@@ -51,9 +51,7 @@ export function usePdfDocument(file: File | null, thumbSize = 160) {
           try {
             const thumb = await renderPageThumb(d, i + 1, thumbSize);
             if (cancel) return;
-            setPages((cur) =>
-              cur.map((p) => (p.index === i ? { ...p, thumb } : p)),
-            );
+            setPages((cur) => cur.map((p) => (p.index === i ? { ...p, thumb } : p)));
           } catch {
             /* ignore single-page failures */
           }

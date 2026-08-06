@@ -135,7 +135,9 @@ export default function YamlJsonTool() {
                 value={String(settings.indent)}
                 onValueChange={(v) => setSettings({ indent: Number(v) })}
               >
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="2">2 spaces</SelectItem>
                   <SelectItem value="4">4 spaces</SelectItem>
@@ -149,7 +151,9 @@ export default function YamlJsonTool() {
                   value={String(settings.flowLevel)}
                   onValueChange={(v) => setSettings({ flowLevel: Number(v) })}
                 >
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="-1">Block (default)</SelectItem>
                     <SelectItem value="0">Flow</SelectItem>

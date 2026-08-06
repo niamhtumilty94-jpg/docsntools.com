@@ -77,7 +77,9 @@ export default function PdfToImages() {
   const estimate = useMemo(() => {
     if (!pages.length) return 0;
     // Rough size estimate per page
-    const avgArea = pages.reduce((a, p) => a + p.width * p.height * settings.scale * settings.scale, 0) / pages.length;
+    const avgArea =
+      pages.reduce((a, p) => a + p.width * p.height * settings.scale * settings.scale, 0) /
+      pages.length;
     const bytesPerPx = settings.type === "image/png" ? 4 : 0.6 * (settings.quality / 100);
     return Math.round(avgArea * bytesPerPx * selected.size);
   }, [pages, settings, selected.size]);
@@ -91,11 +93,15 @@ export default function PdfToImages() {
       const ext = settings.type === "image/png" ? "png" : "jpg";
       const base = file.name.replace(/\.pdf$/i, "");
       const entries: Record<string, Uint8Array> = {};
-      const indices = pages
-        .filter((p) => selected.has(`p-${p.index}`))
-        .map((p) => p.index);
+      const indices = pages.filter((p) => selected.has(`p-${p.index}`)).map((p) => p.index);
       for (const i of indices) {
-        const blob = await renderPageBlob(doc, i + 1, settings.scale, settings.type, settings.quality / 100);
+        const blob = await renderPageBlob(
+          doc,
+          i + 1,
+          settings.scale,
+          settings.type,
+          settings.quality / 100,
+        );
         entries[`${base}-p${String(i + 1).padStart(3, "0")}.${ext}`] = new Uint8Array(
           await blob.arrayBuffer(),
         );
@@ -169,8 +175,8 @@ export default function PdfToImages() {
               </div>
             )}
             <p className="font-mono text-xs text-muted-foreground sm:col-span-3">
-              {selected.size} / {pages.length} page{pages.length === 1 ? "" : "s"} selected · est.
-              ~{formatBytes(estimate)}
+              {selected.size} / {pages.length} page{pages.length === 1 ? "" : "s"} selected · est. ~
+              {formatBytes(estimate)}
             </p>
           </div>
 
@@ -185,11 +191,7 @@ export default function PdfToImages() {
             <Button size="sm" variant="outline" onClick={() => setSelected(new Set())}>
               Clear selection
             </Button>
-            <Button
-              onClick={run}
-              disabled={busy || selected.size === 0}
-              className="ml-auto"
-            >
+            <Button onClick={run} disabled={busy || selected.size === 0} className="ml-auto">
               {busy && <Loader2 className="h-4 w-4 animate-spin" />}
               Convert {selected.size === 1 ? "& download" : "& download ZIP"}
             </Button>

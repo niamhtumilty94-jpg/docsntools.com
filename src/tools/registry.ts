@@ -17,7 +17,7 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   // Dev
   "json-formatter": lazy(() => import("./dev/json-formatter")),
   "jwt-decoder": lazy(() => import("./dev/jwt-decoder")),
-  "base64": lazy(() => import("./dev/base64")),
+  base64: lazy(() => import("./dev/base64")),
   "url-encoder": lazy(() => import("./dev/url-encoder")),
   "hash-generator": lazy(() => import("./dev/hash-generator")),
   "uuid-generator": lazy(() => import("./dev/uuid-generator")),
@@ -28,7 +28,7 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "qr-code": lazy(() => import("./utilities/qr-code")),
   "password-generator": lazy(() => import("./utilities/password-generator")),
   "unit-converter": lazy(() => import("./utilities/unit-converter")),
-  "timestamp": lazy(() => import("./utilities/timestamp")),
+  timestamp: lazy(() => import("./utilities/timestamp")),
   // Text
   "case-converter": lazy(() => import("./text/case-converter")),
   "word-counter": lazy(() => import("./text/word-counter")),

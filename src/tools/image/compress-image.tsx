@@ -63,7 +63,13 @@ function pickMime(source: string, choice: FormatChoice): ImageMime {
 async function compressFile(
   file: File,
   settings: Settings,
-): Promise<{ blob: Blob; width: number; height: number; mime: ImageMime; fellBack: boolean } | null> {
+): Promise<{
+  blob: Blob;
+  width: number;
+  height: number;
+  mime: ImageMime;
+  fellBack: boolean;
+} | null> {
   const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
   try {
     let { width, height } = bitmap;
@@ -103,7 +109,13 @@ export default function CompressImageTool() {
   const [settings, setSettings] = useToolSettings<Settings>("compress-image", DEFAULTS);
   const [file, setFile] = useState<File | null>(null);
   const [bulkFiles, setBulkFiles] = useState<File[]>([]);
-  const [output, setOutput] = useState<{ blob: Blob; width: number; height: number; mime: ImageMime; fellBack: boolean } | null>(null);
+  const [output, setOutput] = useState<{
+    blob: Blob;
+    width: number;
+    height: number;
+    mime: ImageMime;
+    fellBack: boolean;
+  } | null>(null);
   const [working, setWorking] = useState(false);
   const { image, error: decodeError } = useImageBitmap(file);
   useDecodeErrorToast(decodeError);
@@ -214,10 +226,7 @@ export default function CompressImageTool() {
         </h2>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs">
-            <Switch
-              checked={settings.bulk}
-              onCheckedChange={(v) => setSettings({ bulk: v })}
-            />
+            <Switch checked={settings.bulk} onCheckedChange={(v) => setSettings({ bulk: v })} />
             <span>Bulk mode</span>
           </label>
           <SampleDataButton
@@ -290,9 +299,7 @@ export default function CompressImageTool() {
         </div>
         <div className="space-y-1.5">
           <Label>Tip</Label>
-          <p className="text-xs text-muted-foreground">
-            WebP at 75 typically beats JPEG by ~25%.
-          </p>
+          <p className="text-xs text-muted-foreground">WebP at 75 typically beats JPEG by ~25%.</p>
         </div>
       </div>
 
@@ -302,11 +309,7 @@ export default function CompressImageTool() {
           Compress {bulkFiles.length || ""} & download ZIP
         </Button>
       ) : (
-        <OutputPanel
-          title="Result"
-          blob={output?.blob}
-          filename={downloadName}
-        >
+        <OutputPanel title="Result" blob={output?.blob} filename={downloadName}>
           {file && working && !output ? (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" /> Encoding…
@@ -357,9 +360,13 @@ function BulkPicker({
         }}
       >
         <p className="text-sm font-semibold">
-          {files.length ? `${files.length} image${files.length === 1 ? "" : "s"} queued` : "Drop multiple images or click to pick"}
+          {files.length
+            ? `${files.length} image${files.length === 1 ? "" : "s"} queued`
+            : "Drop multiple images or click to pick"}
         </p>
-        <p className="text-xs text-muted-foreground">All files processed locally and packaged into one ZIP</p>
+        <p className="text-xs text-muted-foreground">
+          All files processed locally and packaged into one ZIP
+        </p>
         <input
           ref={inputRef}
           type="file"

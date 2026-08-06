@@ -84,9 +84,7 @@ export function FullPageDropZone({
         <div className="rounded-xl border-2 border-dashed border-primary bg-card px-10 py-8 text-center shadow-2xl">
           <Upload className="mx-auto h-10 w-10 text-primary" aria-hidden="true" />
           <p className="mt-3 text-lg font-semibold">Drop {accept} to load</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Files are processed in your browser
-          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Files are processed in your browser</p>
         </div>
       </div>
     </>

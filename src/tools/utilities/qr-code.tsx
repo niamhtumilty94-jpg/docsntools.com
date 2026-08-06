@@ -578,9 +578,7 @@ export default function QrCodeTool() {
               </div>
               {logo && (
                 <div className="space-y-1">
-                  <Label className="text-xs">
-                    Logo size: {Math.round(style.logoSize * 100)}%
-                  </Label>
+                  <Label className="text-xs">Logo size: {Math.round(style.logoSize * 100)}%</Label>
                   <Slider
                     min={0.1}
                     max={0.5}

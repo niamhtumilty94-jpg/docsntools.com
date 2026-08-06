@@ -104,7 +104,12 @@ export default function DedupeSortTool() {
     } else if (settings.sort === "reverse") {
       lines = [...lines].reverse();
     }
-    if (settings.direction === "desc" && settings.sort !== "shuffle" && settings.sort !== "reverse" && settings.sort !== "none") {
+    if (
+      settings.direction === "desc" &&
+      settings.sort !== "shuffle" &&
+      settings.sort !== "reverse" &&
+      settings.sort !== "none"
+    ) {
       lines = [...lines].reverse();
     }
 
@@ -141,7 +146,9 @@ export default function DedupeSortTool() {
               value={settings.sort}
               onValueChange={(v) => setSettings({ sort: v as SortMode })}
             >
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="none">No sort</SelectItem>
                 <SelectItem value="alpha">Alphabetical</SelectItem>
@@ -159,7 +166,9 @@ export default function DedupeSortTool() {
               value={settings.direction}
               onValueChange={(v) => setSettings({ direction: v as "asc" | "desc" })}
             >
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="asc">Ascending</SelectItem>
                 <SelectItem value="desc">Descending</SelectItem>
@@ -183,7 +192,9 @@ export default function DedupeSortTool() {
 
       <OutputPanel title="Result" text={output} filename="lines.txt" shareUrl={shareUrl}>
         <div className="mb-2 flex gap-3 text-xs text-muted-foreground">
-          <span>{originalCount} → {finalCount} lines</span>
+          <span>
+            {originalCount} → {finalCount} lines
+          </span>
           {dupesRemoved > 0 && <span>{dupesRemoved} duplicates removed</span>}
         </div>
         <pre className="max-h-[460px] overflow-auto whitespace-pre-wrap break-words rounded-md border border-border bg-muted/30 p-3 font-mono text-xs">

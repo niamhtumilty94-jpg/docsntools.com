@@ -41,14 +41,11 @@ export function useToolSettings<T extends object>(
     }
   }, [key, state]);
 
-  const update = useCallback(
-    (patch: Partial<T> | ((prev: T) => T)) => {
-      setState((prev) =>
-        typeof patch === "function" ? (patch as (p: T) => T)(prev) : { ...prev, ...patch },
-      );
-    },
-    [],
-  );
+  const update = useCallback((patch: Partial<T> | ((prev: T) => T)) => {
+    setState((prev) =>
+      typeof patch === "function" ? (patch as (p: T) => T)(prev) : { ...prev, ...patch },
+    );
+  }, []);
 
   return [state, update];
 }
