@@ -36,10 +36,9 @@ function bytesToBase64(bytes: Uint8Array, urlSafe: boolean): string {
 
 function base64ToBytes(s: string): Uint8Array {
   const cleaned = s.replace(/\s+/g, "");
-  const b64 =
-    cleaned.replace(/-/g, "+").replace(/_/g, "/") +
-    "===".slice((cleaned.length + 3) % 4);
-  const bin = typeof atob !== "undefined" ? atob(b64) : Buffer.from(b64, "base64").toString("binary");
+  const b64 = cleaned.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((cleaned.length + 3) % 4);
+  const bin =
+    typeof atob !== "undefined" ? atob(b64) : Buffer.from(b64, "base64").toString("binary");
   const out = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
@@ -53,11 +52,40 @@ function wrap(s: string, n = 76): string {
 
 function detectMime(bytes: Uint8Array): string | null {
   // Tiny magic-number sniff for previews
-  if (bytes.length > 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return "image/jpeg";
-  if (bytes.length > 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) return "image/png";
-  if (bytes.length > 4 && bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38) return "image/gif";
-  if (bytes.length > 12 && bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) return "image/webp";
-  if (bytes.length > 4 && bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46) return "application/pdf";
+  if (bytes.length > 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff)
+    return "image/jpeg";
+  if (
+    bytes.length > 8 &&
+    bytes[0] === 0x89 &&
+    bytes[1] === 0x50 &&
+    bytes[2] === 0x4e &&
+    bytes[3] === 0x47
+  )
+    return "image/png";
+  if (
+    bytes.length > 4 &&
+    bytes[0] === 0x47 &&
+    bytes[1] === 0x49 &&
+    bytes[2] === 0x46 &&
+    bytes[3] === 0x38
+  )
+    return "image/gif";
+  if (
+    bytes.length > 12 &&
+    bytes[8] === 0x57 &&
+    bytes[9] === 0x45 &&
+    bytes[10] === 0x42 &&
+    bytes[11] === 0x50
+  )
+    return "image/webp";
+  if (
+    bytes.length > 4 &&
+    bytes[0] === 0x25 &&
+    bytes[1] === 0x50 &&
+    bytes[2] === 0x44 &&
+    bytes[3] === 0x46
+  )
+    return "application/pdf";
   return null;
 }
 
@@ -279,7 +307,6 @@ export default function Base64Tool() {
                   </Button>
                 </div>
                 {detectedDecode.mime.startsWith("image/") && (
-                  // eslint-disable-next-line jsx-a11y/img-redundant-alt
                   <img
                     src={detectedDecode.url}
                     alt="Decoded preview"

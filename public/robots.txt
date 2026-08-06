@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://docsntool.com/sitemap.xml
+Sitemap: https://www.docsntools.com/sitemap.xml

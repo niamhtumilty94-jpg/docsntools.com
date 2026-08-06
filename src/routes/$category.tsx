@@ -1,11 +1,7 @@
 import { createFileRoute, notFound, redirect, Link } from "@tanstack/react-router";
 
 import { categoryHead } from "@/lib/seo";
-import {
-  CATEGORY_BY_SLUG,
-  TOOLS_BY_CATEGORY,
-  type ToolCategory,
-} from "@/lib/tools";
+import { CATEGORY_BY_SLUG, TOOLS_BY_CATEGORY, type ToolCategory } from "@/lib/tools";
 
 const VALID: ToolCategory[] = ["pdf", "image", "text", "dev", "utilities"];
 
@@ -26,7 +22,9 @@ export const Route = createFileRoute("/$category")({
   head: ({ params }) => {
     const cat = CATEGORY_BY_SLUG[params.category as ToolCategory];
     if (!cat) return { meta: [{ title: "Not found" }] };
-    return categoryHead(cat.name, cat.description);
+    // Pass the meta object, not the display name - the string overload derives
+    // the path from the name and would emit a canonical of "/pdf tools".
+    return categoryHead(cat);
   },
   notFoundComponent: () => (
     <div className="mx-auto max-w-3xl px-4 py-16 text-center">

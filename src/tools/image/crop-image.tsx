@@ -79,9 +79,19 @@ export default function CropImageTool() {
   const [working, setWorking] = useState(false);
 
   const previewUrl = useMemo(() => (file ? URL.createObjectURL(file) : null), [file]);
-  useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
+  useEffect(
+    () => () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    },
+    [previewUrl],
+  );
   const outputUrl = useMemo(() => (output ? URL.createObjectURL(output.blob) : null), [output]);
-  useEffect(() => () => { if (outputUrl) URL.revokeObjectURL(outputUrl); }, [outputUrl]);
+  useEffect(
+    () => () => {
+      if (outputUrl) URL.revokeObjectURL(outputUrl);
+    },
+    [outputUrl],
+  );
 
   // Initialize a centered crop when a new image arrives or aspect changes.
   useEffect(() => {
@@ -135,7 +145,8 @@ export default function CropImageTool() {
     ? `${file.name.replace(/\.[^.]+$/, "")}-cropped.${output ? FORMAT_EXT[output.mime] : "jpg"}`
     : "cropped.jpg";
 
-  const lossy = settings.format !== "image/png" && (settings.format !== "keep" || file?.type !== "image/png");
+  const lossy =
+    settings.format !== "image/png" && (settings.format !== "keep" || file?.type !== "image/png");
 
   return (
     <div className="space-y-5">
@@ -148,7 +159,13 @@ export default function CropImageTool() {
       </div>
 
       <div ref={dropRef}>
-        <ImageDropArea file={file} onFile={setFile} width={image?.width} height={image?.height} disabled={working} />
+        <ImageDropArea
+          file={file}
+          onFile={setFile}
+          width={image?.width}
+          height={image?.height}
+          disabled={working}
+        />
       </div>
 
       {previewUrl && image && (
@@ -161,7 +178,6 @@ export default function CropImageTool() {
               aspect={ASPECT_VALUES[settings.aspect]}
               className="max-h-[480px] w-full"
             >
-              {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <img src={previewUrl} className="max-h-[480px] w-auto mx-auto" />
             </ReactCrop>
           </div>
@@ -169,19 +185,31 @@ export default function CropImageTool() {
           <div className="grid gap-3 rounded-lg border border-border bg-muted/20 p-4 sm:grid-cols-3">
             <div className="space-y-1.5">
               <Label>Aspect ratio</Label>
-              <Select value={settings.aspect} onValueChange={(v) => setSettings({ aspect: v as AspectKey })}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Select
+                value={settings.aspect}
+                onValueChange={(v) => setSettings({ aspect: v as AspectKey })}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   {Object.keys(ASPECT_VALUES).map((k) => (
-                    <SelectItem key={k} value={k}>{k}</SelectItem>
+                    <SelectItem key={k} value={k}>
+                      {k}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-1.5">
               <Label>Output format</Label>
-              <Select value={settings.format} onValueChange={(v) => setSettings({ format: v as FormatChoice })}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Select
+                value={settings.format}
+                onValueChange={(v) => setSettings({ format: v as FormatChoice })}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="keep">Keep original</SelectItem>
                   <SelectItem value="image/jpeg">JPEG</SelectItem>
@@ -195,7 +223,9 @@ export default function CropImageTool() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <Label>Quality</Label>
-                  <span className="font-mono text-xs text-muted-foreground">{settings.quality}</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {settings.quality}
+                  </span>
                 </div>
                 <Slider
                   min={10}
@@ -227,7 +257,6 @@ export default function CropImageTool() {
       {output && (
         <OutputPanel title="Cropped image" blob={output.blob} filename={downloadName}>
           <div className="overflow-hidden rounded-lg border border-border">
-            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <img src={outputUrl ?? ""} className="mx-auto max-h-[420px]" />
           </div>
         </OutputPanel>

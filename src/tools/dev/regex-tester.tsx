@@ -35,7 +35,11 @@ const COMMON: { label: string; pattern: string; flags?: string }[] = [
   { label: "IPv4", pattern: "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b", flags: "g" },
   { label: "Hex color", pattern: "#(?:[0-9a-fA-F]{3}){1,2}\\b", flags: "g" },
   { label: "ISO date", pattern: "\\d{4}-\\d{2}-\\d{2}", flags: "g" },
-  { label: "UUID", pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", flags: "gi" },
+  {
+    label: "UUID",
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+    flags: "gi",
+  },
 ];
 
 const GROUP_COLORS = [
@@ -256,7 +260,12 @@ export default function RegexTesterTool() {
             <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Test string ({matches.length} match{matches.length === 1 ? "" : "es"})
             </h3>
-            <SampleDataButton onLoad={() => { setPattern(SAMPLE_PATTERN); setText(SAMPLE_TEXT); }} />
+            <SampleDataButton
+              onLoad={() => {
+                setPattern(SAMPLE_PATTERN);
+                setText(SAMPLE_TEXT);
+              }}
+            />
           </header>
           <Textarea
             value={text}
@@ -271,7 +280,6 @@ export default function RegexTesterTool() {
             </Label>
             <div
               className="max-h-[260px] overflow-auto whitespace-pre-wrap break-words font-mono text-xs leading-relaxed"
-              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: highlighted }}
             />
           </div>

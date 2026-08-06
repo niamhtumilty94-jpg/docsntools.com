@@ -11,7 +11,8 @@ import { UmamiAnalytics } from "@/components/analytics/umami";
 import { CommandMenu } from "@/components/command-menu";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { OG_IMAGE, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { TOOL_COUNT_LABEL } from "@/lib/tools";
 import appCss from "../styles.css?url";
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("th:theme");var d=t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches);if(d)document.documentElement.classList.add("dark");}catch(e){}})();`;
@@ -46,18 +47,22 @@ export const Route = createRootRoute({
       { title: `${SITE_NAME} - ${SITE_TAGLINE}` },
       {
         name: "description",
-        content:
-          "40+ free online tools for PDF, images, text, and developers. No signup. No uploads. Everything runs in your browser.",
+        content: `${TOOL_COUNT_LABEL} free online tools for PDF, images, text, and developers. No signup. No uploads. Everything runs in your browser.`,
       },
       { name: "author", content: SITE_NAME },
       { name: "theme-color", content: "#0b0d12" },
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico" },
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",

@@ -3,5 +3,13 @@
   "name": "docntools",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
+  // Points at the built SSR worker. `npm run build` must run first
+  // (`npm run deploy` does both).
+  "main": "dist/server/server.js",
+  // Static files (favicon, og.png, robots.txt, _headers) are served from the
+  // client build; anything without a matching file falls through to the worker.
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+  },
 }

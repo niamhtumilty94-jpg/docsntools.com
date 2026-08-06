@@ -3,9 +3,12 @@ export const SITE_NAME = "DocnTools";
 export const SITE_TAGLINE = "Free in-browser document & utility tools";
 
 export const SITE_URL = (
-  (import.meta.env.VITE_SITE_URL as string | undefined) ?? "https://docsntool.com"
+  (import.meta.env.VITE_SITE_URL as string | undefined) ?? "https://www.docsntools.com"
 ).replace(/\/$/, "");
 
 export function absUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
+
+/** Absolute URL of the social share card (1200x630). */
+export const OG_IMAGE = `${SITE_URL}/og.png`;

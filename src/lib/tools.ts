@@ -286,11 +286,7 @@ export const TOOLS: Tool[] = [
     keywords: ["jpg to pdf", "png to pdf", "image to pdf", "combine images"],
     icon: ImagePlus,
     path: "/pdf/from-images",
-    howTo: [
-      "Drop your images.",
-      "Reorder them with drag-and-drop.",
-      "Click ‘Create PDF’.",
-    ],
+    howTo: ["Drop your images.", "Reorder them with drag-and-drop.", "Click ‘Create PDF’."],
     faq: standardFaq("Images to PDF", [
       {
         q: "Which image formats are supported?",
@@ -344,11 +340,7 @@ export const TOOLS: Tool[] = [
     keywords: ["watermark", "stamp", "text", "pdf", "draft"],
     icon: Stamp,
     path: "/pdf/watermark",
-    howTo: [
-      "Upload a PDF.",
-      "Type your watermark text and adjust style.",
-      "Download.",
-    ],
+    howTo: ["Upload a PDF.", "Type your watermark text and adjust style.", "Download."],
     faq: standardFaq("Watermark PDF", [
       {
         q: "Can I rotate the watermark diagonally?",
@@ -528,10 +520,7 @@ export const TOOLS: Tool[] = [
     keywords: ["base64", "data uri", "image", "encode", "decode"],
     icon: Binary,
     path: "/image/base64",
-    howTo: [
-      "Drop image to encode, or paste Base64 to decode.",
-      "Copy result or download image.",
-    ],
+    howTo: ["Drop image to encode, or paste Base64 to decode.", "Copy result or download image."],
     faq: standardFaq("Image Base64", [
       {
         q: "Should I inline large images as data URIs?",
@@ -724,8 +713,7 @@ export const TOOLS: Tool[] = [
     category: "text",
     name: "Markdown ↔ HTML",
     description: "Convert Markdown to HTML and back.",
-    longDescription:
-      "Live preview Markdown → HTML rendering, and HTML → Markdown. All in browser.",
+    longDescription: "Live preview Markdown → HTML rendering, and HTML → Markdown. All in browser.",
     about:
       "Markdown ↔ HTML converts between Markdown and HTML in either direction with a live preview. Use it to draft a blog post in Markdown and copy clean HTML into a CMS, or to convert legacy HTML snippets back into editable Markdown.",
     keywords: ["markdown", "md", "html", "convert", "preview"],
@@ -1095,8 +1083,7 @@ export const TOOLS: Tool[] = [
     category: "utilities",
     name: "Password Generator",
     description: "Generate strong passwords with full control.",
-    longDescription:
-      "Cryptographically secure random passwords with length and character options.",
+    longDescription: "Cryptographically secure random passwords with length and character options.",
     about:
       "Password Generator creates cryptographically secure random passwords with full control over length, uppercase, digits, and symbols. Use it for new account signups, generating service credentials, or rotating an old password - generation runs in your browser, so nothing is logged anywhere.",
     keywords: ["password", "generator", "secure", "random"],
@@ -1185,6 +1172,12 @@ for (const t of TOOLS) TOOLS_BY_CATEGORY[t.category].push(t);
 export const CATEGORY_BY_SLUG: Record<ToolCategory, CategoryMeta> = Object.fromEntries(
   CATEGORIES.map((c) => [c.slug, c]),
 ) as Record<ToolCategory, CategoryMeta>;
+
+/**
+ * Marketing-friendly tool count, rounded down to the nearest 5 so copy stays
+ * accurate as tools are added without needing to be edited by hand.
+ */
+export const TOOL_COUNT_LABEL = `${Math.floor(TOOLS.length / 5) * 5}+`;
 
 export function getRelatedTools(tool: Tool): Tool[] {
   if (!tool.related) return [];

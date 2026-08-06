@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0d12"/>
+      <stop offset="100%" stop-color="#161c33"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="96" width="96" height="96" rx="21" fill="#3355d1"/>
+  <path d="M110 125h18a24 24 0 0 1 0 48h-18z" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
+  <text x="204" y="164" font-family="Inter, Helvetica, Arial, sans-serif" font-size="52" font-weight="700" fill="#ffffff">DocnTools</text>
+  <text x="80" y="330" font-family="Inter, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#ffffff">Free in-browser document</text>
+  <text x="80" y="420" font-family="Inter, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#ffffff">&amp; utility tools</text>
+  <text x="80" y="510" font-family="Inter, Helvetica, Arial, sans-serif" font-size="36" fill="#9aa6c4">No signup. No uploads. Everything runs in your browser.</text>
+</svg>
