@@ -1,7 +1,6 @@
 import { createFileRoute, notFound, redirect, Link } from "@tanstack/react-router";
 
-import { categoryHead } from "@/lib/seo";
-import { CATEGORY_BY_SLUG, TOOLS_BY_CATEGORY, type ToolCategory } from "@/lib/tools";
+import { TOOLS_BY_CATEGORY, type ToolCategory } from "@/lib/tools";
 
 const VALID: ToolCategory[] = ["pdf", "image", "text", "dev", "utilities"];
 
@@ -19,13 +18,18 @@ export const Route = createFileRoute("/$category")({
       }
     }
   },
-  head: ({ params }) => {
-    const cat = CATEGORY_BY_SLUG[params.category as ToolCategory];
-    if (!cat) return { meta: [{ title: "Not found" }] };
-    // Pass the meta object, not the display name - the string overload derives
-    // the path from the name and would emit a canonical of "/pdf tools".
-    return categoryHead(cat);
-  },
+  // Deliberately no head() here.
+  //
+  // This is a layout route, so anything it returns is merged into every child
+  // tool page. `links` are not de-duplicated by `rel`, so a canonical here
+  // emitted a SECOND <link rel="canonical"> on all 39 tool pages, pointing at
+  // the category URL and ordered before the tool's own canonical. Google
+  // honoured it and reported the tool pages as "Alternative page with proper
+  // canonical tag" - i.e. dropped them from the index in favour of /pdf, which
+  // itself only redirects.
+  //
+  // The bare category path (/pdf) always redirects in beforeLoad above, so this
+  // route never renders standalone and has no head of its own to describe.
   notFoundComponent: () => (
     <div className="mx-auto max-w-3xl px-4 py-16 text-center">
       <h1 className="text-2xl font-semibold">Category not found</h1>

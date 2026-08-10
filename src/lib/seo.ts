@@ -224,6 +224,31 @@ export function categoryHead(category: CategoryMeta | string, description?: stri
   };
 }
 
+/**
+ * Head for a simple standalone page (privacy, terms, cookies).
+ *
+ * These are listed in the sitemap, so they need a self-referencing canonical -
+ * without one, query-string variants (?utm_source=...) are crawled as separate
+ * URLs and reported as duplicates.
+ */
+export function pageHead(path: string, title: string, description: string) {
+  const url = abs(path);
+  return {
+    meta: [
+      { title: `${title} - ${SITE_NAME}` },
+      { name: "description", content: description },
+      { property: "og:title", content: `${title} - ${SITE_NAME}` },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+    links: [{ rel: "canonical", href: url }],
+  };
+}
+
 export function homeHead() {
   const title = `${SITE_NAME} - ${SITE_TAGLINE}`;
   const description = `${TOOL_COUNT_LABEL} free online tools for PDF, images, text, and developers. No signup, no uploads - everything runs in your browser.`;

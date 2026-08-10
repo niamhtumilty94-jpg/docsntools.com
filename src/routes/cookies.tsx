@@ -1,16 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/cookies")({
-  head: () => ({
-    meta: [
-      { title: "Cookie Policy - DocnTools" },
-      {
-        name: "description",
-        content:
-          "DocnTools does not set tracking cookies. Analytics is cookieless; theme preference uses localStorage.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead(
+      "/cookies",
+      "Cookie Policy",
+      "DocnTools does not set tracking cookies. Analytics is cookieless; theme preference uses localStorage.",
+    ),
   component: CookiesPage,
 });
 

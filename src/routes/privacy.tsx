@@ -1,16 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: "Privacy Policy - DocnTools" },
-      {
-        name: "description",
-        content:
-          "How DocnTools handles your data. Files never leave your browser. Cookieless analytics. No ad networks on tool pages.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead(
+      "/privacy",
+      "Privacy Policy",
+      "How DocnTools handles your data. Files never leave your browser. Cookieless analytics. No ad networks on tool pages.",
+    ),
   component: PrivacyPage,
 });
 

@@ -1,15 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Terms of Service - DocnTools" },
-      {
-        name: "description",
-        content: "Terms governing your use of DocnTools's free in-browser utility tools.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead(
+      "/terms",
+      "Terms of Service",
+      "Terms governing your use of DocnTools's free in-browser utility tools.",
+    ),
   component: TermsPage,
 });
 
