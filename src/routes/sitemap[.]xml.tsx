@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { SITE_URL } from "@/lib/site";
-import { TOOLS } from "@/lib/tools";
+import { CATEGORIES, TOOLS } from "@/lib/tools";
 
 const LEGAL_PATHS = ["/privacy", "/terms", "/cookies"];
 
@@ -19,10 +19,7 @@ function urlEntry(path: string, priority: string, changefreq = "weekly") {
 function buildSitemap(): string {
   const entries: string[] = [];
   entries.push(urlEntry("/", "1.0", "weekly"));
-  // Category paths (/pdf, /image, ...) are intentionally omitted: they redirect
-  // to their first tool rather than rendering a page, and listing redirects in a
-  // sitemap gets them reported as indexing errors. Add them back here if real
-  // category landing pages are ever built.
+  for (const c of CATEGORIES) entries.push(urlEntry(c.path, "0.7", "weekly"));
   for (const t of TOOLS) entries.push(urlEntry(t.path, "0.8", "weekly"));
   for (const p of LEGAL_PATHS) entries.push(urlEntry(p, "0.3", "yearly"));
 

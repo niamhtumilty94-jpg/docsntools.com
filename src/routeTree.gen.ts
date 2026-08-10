@@ -15,6 +15,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as CategoryRouteImport } from './routes/$category'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoryIndexRouteImport } from './routes/$category.index'
 import { Route as CategoryToolRouteImport } from './routes/$category.$tool'
 
 const TermsRoute = TermsRouteImport.update({
@@ -47,6 +48,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoryIndexRoute = CategoryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CategoryRoute,
+} as any)
 const CategoryToolRoute = CategoryToolRouteImport.update({
   id: '/$tool',
   path: '/$tool',
@@ -61,15 +67,16 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$tool': typeof CategoryToolRoute
+  '/$category/': typeof CategoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$category': typeof CategoryRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$tool': typeof CategoryToolRoute
+  '/$category': typeof CategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +87,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$tool': typeof CategoryToolRoute
+  '/$category/': typeof CategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,15 +99,16 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$tool'
+    | '/$category/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/$category'
     | '/cookies'
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$tool'
+    | '/$category'
   id:
     | '__root__'
     | '/'
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$tool'
+    | '/$category/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -164,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$category/': {
+      id: '/$category/'
+      path: '/'
+      fullPath: '/$category/'
+      preLoaderRoute: typeof CategoryIndexRouteImport
+      parentRoute: typeof CategoryRoute
+    }
     '/$category/$tool': {
       id: '/$category/$tool'
       path: '/$tool'
@@ -176,10 +193,12 @@ declare module '@tanstack/react-router' {
 
 interface CategoryRouteChildren {
   CategoryToolRoute: typeof CategoryToolRoute
+  CategoryIndexRoute: typeof CategoryIndexRoute
 }
 
 const CategoryRouteChildren: CategoryRouteChildren = {
   CategoryToolRoute: CategoryToolRoute,
+  CategoryIndexRoute: CategoryIndexRoute,
 }
 
 const CategoryRouteWithChildren = CategoryRoute._addFileChildren(

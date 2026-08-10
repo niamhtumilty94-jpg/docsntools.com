@@ -65,11 +65,11 @@ export function buildToolSeo(tool: Tool): ToolSeoPreview {
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "Any (Web Browser)",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          ratingCount: "120",
-        },
+        // No aggregateRating: this previously emitted a hardcoded 4.8 from 120
+        // ratings on every tool page. Those ratings do not exist, and marking up
+        // review data that isn't visible on the page (let alone real) breaks
+        // Google's structured-data policy and risks a manual action against the
+        // whole domain. Only add it back when there are genuine, on-page ratings.
       },
     },
     {
@@ -220,6 +220,23 @@ export function categoryHead(category: CategoryMeta | string, description?: stri
           ],
         }),
       },
+      // Only emitted when the questions are actually rendered on the page.
+      ...(meta && meta.faq.length > 0
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: meta.faq.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: { "@type": "Answer", text: f.a },
+                })),
+              }),
+            },
+          ]
+        : []),
     ],
   };
 }

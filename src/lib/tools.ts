@@ -63,6 +63,10 @@ export interface CategoryMeta {
   description: string;
   path: string;
   colorVar: string;
+  /** Opening copy for the category landing page. */
+  intro: string;
+  /** Questions answered on the landing page; also drives its FAQPage schema. */
+  faq: { q: string; a: string }[];
 }
 
 export const CATEGORIES: CategoryMeta[] = [
@@ -72,6 +76,22 @@ export const CATEGORIES: CategoryMeta[] = [
     description: "Merge, split, rotate, compress, watermark - all in your browser.",
     path: "/pdf",
     colorVar: "var(--cat-pdf)",
+    intro:
+      "Most online PDF editors work by uploading your document to a server, processing it there, and emailing you a download link. That is a poor trade for a contract, a payslip, or a medical form. These tools do the same jobs - merging, splitting, rotating, compressing, watermarking and extracting - entirely inside your browser tab, using pdf-lib and PDF.js. Nothing is transmitted, so there is no upload wait, no queue, and no file sitting on someone else's disk.",
+    faq: [
+      {
+        q: "Are my PDFs uploaded anywhere?",
+        a: "No. Every PDF tool here runs in your browser. The file is read from disk into memory, processed locally, and written back out as a download. It never crosses the network.",
+      },
+      {
+        q: "Is there a file size or page limit?",
+        a: "There is no imposed limit. The practical ceiling is your device's memory - large scanned documents of several hundred megabytes are usually fine on a desktop, less so on an older phone.",
+      },
+      {
+        q: "Will editing a PDF reduce its quality?",
+        a: "Merging, splitting, reordering and rotating copy pages losslessly, so text stays selectable and images keep their resolution. Only the compression tool deliberately re-encodes images, and it lets you choose how far to go.",
+      },
+    ],
   },
   {
     slug: "image",
@@ -79,6 +99,22 @@ export const CATEGORIES: CategoryMeta[] = [
     description: "Compress, resize, crop, convert formats - instant, private.",
     path: "/image",
     colorVar: "var(--cat-image)",
+    intro:
+      "Resizing a screenshot or shrinking a photo for an email attachment should not require an account or a round trip to a stranger's server. These tools use the browser's own Canvas and File APIs to compress, resize, crop and convert between JPEG, PNG and WebP, plus batch-zip a folder of images at once. Because the work happens on your hardware, large batches process at local speed rather than upload speed.",
+    faq: [
+      {
+        q: "Which image formats are supported?",
+        a: "JPEG, PNG and WebP for both input and output, plus GIF and BMP as inputs. Conversion runs through the browser's Canvas encoder, so support tracks whatever your browser can decode.",
+      },
+      {
+        q: "Does compressing an image lose quality?",
+        a: "JPEG and WebP are lossy, so some quality is traded for size - you control the quality level and can preview the result before downloading. PNG output is lossless.",
+      },
+      {
+        q: "Is image metadata like EXIF preserved?",
+        a: "No. Re-encoding through Canvas drops EXIF, including GPS coordinates and camera details. That is usually desirable when sharing photos publicly, but keep an original if you need the metadata.",
+      },
+    ],
   },
   {
     slug: "text",
@@ -86,6 +122,22 @@ export const CATEGORIES: CategoryMeta[] = [
     description: "Case, count, diff, format, convert - fast text utilities.",
     path: "/text",
     colorVar: "var(--cat-text)",
+    intro:
+      "Everyday text chores - changing case, counting words, comparing two drafts, removing duplicate lines, running a find-and-replace - are quick jobs that rarely justify opening an editor. These run instantly as you type, with no character limits. Since the text never leaves the page, they are safe to use on draft copy, internal notes, or anything else you would not paste into a random website.",
+    faq: [
+      {
+        q: "Is there a limit on how much text I can paste?",
+        a: "No fixed limit. Processing happens in your browser, so very large inputs are bounded by memory rather than by a server-side cap.",
+      },
+      {
+        q: "Is my text sent anywhere?",
+        a: "No. Nothing you type or paste is transmitted, logged, or stored on a server.",
+      },
+      {
+        q: "Does the word counter match Word or Google Docs?",
+        a: "Word counts match closely for ordinary prose. Small differences can appear around hyphenated compounds and numbers, since each application draws word boundaries slightly differently.",
+      },
+    ],
   },
   {
     slug: "dev",
@@ -93,6 +145,22 @@ export const CATEGORIES: CategoryMeta[] = [
     description: "JSON, JWT, base64, hash, regex - for developers.",
     path: "/dev",
     colorVar: "var(--cat-dev)",
+    intro:
+      "Formatting JSON, decoding a JWT, generating a hash or testing a regular expression are things developers do dozens of times a day, often against data that should not be pasted into an unknown website. Access tokens, API responses and customer records routinely end up in these boxes. Every tool here runs locally, using the Web Crypto API for hashing, so debugging data stays on your machine.",
+    faq: [
+      {
+        q: "Is it safe to paste a real JWT or API response here?",
+        a: "Safer than a server-side decoder, yes. Decoding happens entirely in your browser and nothing is sent anywhere. That said, treat any token you have pasted into any tool as worth rotating if it is highly sensitive.",
+      },
+      {
+        q: "Does the JWT decoder verify signatures?",
+        a: "It decodes and displays the header, payload and claims, and flags expiry. Verifying a signature requires the signing key, which stays on your server - so treat the output as inspection, not authentication.",
+      },
+      {
+        q: "Which hash algorithms are available?",
+        a: "SHA-1, SHA-256, SHA-384 and SHA-512 via the browser's Web Crypto API, plus MD5. MD5 and SHA-1 are included for checksums and legacy compatibility, not for security.",
+      },
+    ],
   },
   {
     slug: "utilities",
@@ -100,6 +168,22 @@ export const CATEGORIES: CategoryMeta[] = [
     description: "QR codes, passwords, units, timestamps - everyday helpers.",
     path: "/utilities",
     colorVar: "var(--cat-utilities)",
+    intro:
+      "A handful of small tools that are annoying to find and easy to distrust elsewhere: generating a QR code, creating a strong password, converting units, and translating Unix timestamps into readable dates. The password generator in particular uses the browser's cryptographic random source and never transmits what it produces - which is the whole point of a password generator.",
+    faq: [
+      {
+        q: "Are generated passwords actually random and private?",
+        a: "They are drawn from crypto.getRandomValues(), the browser's cryptographically secure random source, and are generated on your device. Nothing is sent over the network or stored.",
+      },
+      {
+        q: "Do the QR codes expire or get tracked?",
+        a: "No. The QR code is an image encoding your data directly - there is no redirect service in between, so nothing expires and no scans are counted.",
+      },
+      {
+        q: "Which timezones does the timestamp converter handle?",
+        a: "Any timezone your browser knows about via the IANA database, with common ones listed for quick access, alongside UTC and your local time.",
+      },
+    ],
   },
 ];
 
