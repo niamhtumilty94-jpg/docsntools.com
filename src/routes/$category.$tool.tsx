@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect, Link } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 
 import { ToolPageLayout } from "@/components/tool-page";
@@ -12,11 +12,27 @@ function findTool(category: string, slug: string) {
   return TOOLS.find((t) => t.category === category && t.path === `/${category}/${slug}`);
 }
 
+/**
+ * A tool's `slug` and the last segment of its `path` are not always the same -
+ * "merge-pdf" lives at /pdf/merge, "crop-image" at /image/crop. 15 of the 39
+ * tools differ this way, so the slug-shaped URL (the obvious guess, and what
+ * any slug-derived link or older sitemap would have produced) used to 404.
+ * Send those to the real page instead of losing the visitor and the link.
+ */
+function findToolBySlug(category: string, slug: string) {
+  return TOOLS.find((t) => t.category === category && t.slug === slug);
+}
+
 export const Route = createFileRoute("/$category/$tool")({
   beforeLoad: ({ params }) => {
     if (!VALID.includes(params.category as ToolCategory)) throw notFound();
     const tool = findTool(params.category, params.tool);
-    if (!tool) throw notFound();
+    if (tool) return;
+
+    const bySlug = findToolBySlug(params.category, params.tool);
+    if (bySlug) throw redirect({ to: bySlug.path, statusCode: 301 });
+
+    throw notFound();
   },
   head: ({ params }) => {
     const tool = findTool(params.category, params.tool);
