@@ -20,6 +20,7 @@ import {
   FileCode,
   KeyRound,
   Binary,
+  Gauge,
   Link2,
   Fingerprint,
   IdCard,
@@ -1131,6 +1132,76 @@ export const TOOLS: Tool[] = [
       },
     ]),
     related: ["regex-tester", "url-encoder", "json-formatter"],
+  },
+  {
+    slug: "token-counter",
+    category: "dev",
+    name: "Token Counter",
+    description: "Count LLM tokens in a prompt, with a live token preview.",
+    longDescription:
+      "Count tokens with the real BPE tokenizers (o200k_base and cl100k_base) rather than a rough estimate. Runs entirely in your browser, so prompts stay private.",
+    about:
+      "Token Counter tells you exactly how many tokens a piece of text becomes, using the same byte-pair encodings the models use rather than a characters-divided-by-four guess. That matters because tokens drive both cost and context limits, and the ratio varies enormously - dense English prose runs about four characters per token, while code, JSON, non-Latin scripts and emoji can run far higher. The token preview shades each token separately, which makes it obvious why a string tokenises the way it does. Everything happens locally, so you can safely paste real prompts, system messages and customer data.",
+    keywords: ["token", "tokenizer", "llm", "gpt", "bpe", "count", "prompt", "context"],
+    icon: Binary,
+    path: "/dev/token-counter",
+    howTo: [
+      "Paste or type the text you want to measure.",
+      "Pick the encoding your model uses (o200k_base for the GPT-4o generation, cl100k_base for GPT-4 and GPT-3.5).",
+      "Read the token count, and use the preview to see where the boundaries fall.",
+    ],
+    faq: standardFaq("Token Counter", [
+      {
+        q: "Is this an estimate or the real count?",
+        a: "The real count. It runs the actual byte-pair encoding in your browser, so the number matches what the tokenizer produces - not a characters-per-token approximation.",
+      },
+      {
+        q: "Which encoding should I choose?",
+        a: "o200k_base for the GPT-4o generation, cl100k_base for GPT-4, GPT-3.5 and the text-embedding-3 models. Other providers use their own tokenizers, so treat these counts as a close guide rather than an exact figure there.",
+      },
+      {
+        q: "Why is my token count higher than my word count?",
+        a: "Tokens are sub-word units. Ordinary English averages roughly 0.75 words per token, but code, JSON, URLs, non-Latin scripts and emoji split into many more tokens - a single emoji can cost several on its own.",
+      },
+      {
+        q: "Is my prompt sent anywhere?",
+        a: "No. The tokenizer runs locally in your browser, which is why it is safe to paste real system prompts or customer data.",
+      },
+    ]),
+    related: ["context-window", "json-formatter", "base64", "word-counter"],
+  },
+  {
+    slug: "context-window",
+    category: "dev",
+    name: "Context Window Calculator",
+    description: "Check whether a prompt fits in a model's context window.",
+    longDescription:
+      "Tokenise a prompt, set your context window and how much to reserve for the reply, and see instantly whether it fits and how much room is left.",
+    about:
+      "Context Window Calculator answers the practical question behind a token count: will this actually fit? It tokenises your prompt locally, subtracts the space you want to keep free for the model's reply, and shows how much of the window you are using and how much is left. That is useful when assembling retrieval-augmented prompts, deciding how many documents or conversation turns to include, or working out why a request is being truncated. Because context limits differ by model and provider tier and change frequently, the window size is a field you control rather than a figure baked into the page.",
+    keywords: ["context", "window", "tokens", "llm", "prompt", "limit", "rag", "truncation"],
+    icon: Gauge,
+    path: "/dev/context-window",
+    howTo: [
+      "Paste the prompt, documents or transcript you plan to send.",
+      "Enter your model's context window, or pick one of the common sizes.",
+      "Set how many tokens to reserve for the reply, then check the remaining budget.",
+    ],
+    faq: standardFaq("Context Window Calculator", [
+      {
+        q: "Why do I need to reserve tokens for the output?",
+        a: "On most APIs the context window covers the input and the generated reply together. If you fill the whole window with input, there is no room left to answer, so reserve at least as many tokens as the longest reply you expect.",
+      },
+      {
+        q: "Why aren't specific models listed?",
+        a: "Context limits vary by model and provider tier and change often, so a hard-coded list would go out of date and mislead. Check your provider's current documentation and enter the number - the common sizes are one click away.",
+      },
+      {
+        q: "What does 'copies that fit' mean?",
+        a: "How many times your current text would fit into the usable window. It is a quick way to judge how many similar documents or conversation turns you can include before running out of room.",
+      },
+    ]),
+    related: ["token-counter", "json-formatter", "word-counter"],
   },
 
   // ---------------- UTILITIES ----------------

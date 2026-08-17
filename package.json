@@ -74,6 +74,7 @@
     "dompurify": "^3.4.1",
     "embla-carousel-react": "^8.6.0",
     "fflate": "^0.8.2",
+    "gpt-tokenizer": "^4.0.0",
     "input-otp": "^1.4.2",
     "jose": "^6.2.2",
     "js-md5": "^0.8.3",

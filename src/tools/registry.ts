@@ -24,6 +24,8 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "regex-tester": lazy(() => import("./dev/regex-tester")),
   "color-converter": lazy(() => import("./dev/color-converter")),
   "robots-tester": lazy(() => import("./dev/robots-tester")),
+  "token-counter": lazy(() => import("./dev/token-counter")),
+  "context-window": lazy(() => import("./dev/context-window")),
   // Utilities
   "qr-code": lazy(() => import("./utilities/qr-code")),
   "password-generator": lazy(() => import("./utilities/password-generator")),
