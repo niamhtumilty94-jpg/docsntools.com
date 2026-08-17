@@ -2,8 +2,15 @@
 export const SITE_NAME = "DocnTools";
 export const SITE_TAGLINE = "Free in-browser document & utility tools";
 
+/**
+ * Apex, not www: Search Console crawls docsntools.com and the sitemap is
+ * submitted there, so canonicals must name the same host - otherwise the two
+ * variants of the site compete as duplicates.
+ */
+const DEFAULT_SITE_URL = "https://docsntools.com";
+
 export const SITE_URL = (
-  (import.meta.env.VITE_SITE_URL as string | undefined) ?? "https://www.docsntools.com"
+  (import.meta.env.VITE_SITE_URL as string | undefined) ?? DEFAULT_SITE_URL
 ).replace(/\/$/, "");
 
 export function absUrl(path: string): string {
