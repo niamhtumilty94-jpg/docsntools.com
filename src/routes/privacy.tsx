@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { pageHead } from "@/lib/seo";
 
+/** Only disclose GA4 when it is actually configured for this build. */
+const GA4_ENABLED = Boolean(import.meta.env.VITE_GA4_MEASUREMENT_ID);
+
 export const Route = createFileRoute("/privacy")({
   head: () =>
     pageHead(
@@ -30,8 +33,10 @@ function PrivacyPage() {
             have no way to see them.
           </p>
           <p>
-            We use cookieless analytics (Umami) to count anonymous pageviews. We do not run ad
-            networks or third-party trackers on tool pages.
+            We use cookieless analytics to count anonymous pageviews
+            {GA4_ENABLED ? " (Umami, and Google Analytics 4 in cookieless mode)" : " (Umami)"}. We
+            do not run ad networks on tool pages, and no analytics provider receives the contents of
+            anything you load into a tool.
           </p>
         </section>
 
@@ -71,6 +76,13 @@ function PrivacyPage() {
             <li>
               <strong>Umami Cloud</strong> - anonymous, cookieless analytics. EU-hosted.
             </li>
+            {GA4_ENABLED && (
+              <li>
+                <strong>Google Analytics 4</strong> - aggregate traffic measurement, loaded with
+                Consent Mode set to deny storage so it operates without cookies. Google processes
+                this data as a sub-processor; pageview and device metadata only.
+              </li>
+            )}
             <li>
               <strong>Cloudflare</strong> - content delivery and edge hosting.
             </li>

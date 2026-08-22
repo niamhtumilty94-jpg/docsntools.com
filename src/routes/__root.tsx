@@ -7,6 +7,7 @@ import {
   ScriptOnce,
 } from "@tanstack/react-router";
 
+import { GA4Analytics } from "@/components/analytics/ga4";
 import { UmamiAnalytics } from "@/components/analytics/umami";
 import { CommandMenu } from "@/components/command-menu";
 import { SiteFooter } from "@/components/site-footer";
@@ -105,6 +106,7 @@ function RootComponent() {
       <CommandMenu />
       {/* Side-effect components - render nothing, lazily attach 3rd-party scripts */}
       <UmamiAnalytics />
+      <GA4Analytics />
     </div>
   );
 }

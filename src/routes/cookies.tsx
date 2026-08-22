@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { pageHead } from "@/lib/seo";
 
+/** Only disclose GA4 when it is actually configured for this build. */
+const GA4_ENABLED = Boolean(import.meta.env.VITE_GA4_MEASUREMENT_ID);
+
 export const Route = createFileRoute("/cookies")({
   head: () =>
     pageHead(
@@ -38,6 +41,15 @@ function CookiesPage() {
               specific person. This is recognised by EU data-protection regulators as not requiring
               consent.
             </li>
+            {GA4_ENABLED && (
+              <li>
+                <strong>Analytics (Google Analytics 4)</strong> - runs in cookieless mode. We load
+                GA4 with Google Consent Mode set to deny storage, so it does not write the{" "}
+                <code>_ga</code> cookies it normally would, and measurement is limited to aggregate,
+                cookieless pings. If that ever changes we will ask for your consent first, and this
+                page will say so.
+              </li>
+            )}
             <li>
               <strong>Theme preference</strong> - stored in your browser's <code>localStorage</code>{" "}
               under the key <code>th:theme</code>. This is not a cookie, is never sent to any
