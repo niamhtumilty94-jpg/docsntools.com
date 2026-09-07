@@ -16,6 +16,14 @@ import appCss from "../styles.css?url";
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("th:theme");var d=t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches);if(d)document.documentElement.classList.add("dark");}catch(e){}})();`;
 
+const FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap";
+
+// Loads the Google Fonts stylesheet without blocking first paint (the
+// browser can't apply this via a plain <link rel="stylesheet">, which
+// delays render until the cross-origin fetch resolves).
+const fontsLoaderScript = `(function(){var l=document.createElement("link");l.rel="stylesheet";l.href=${JSON.stringify(FONTS_HREF)};document.head.appendChild(l);})();`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -63,10 +71,7 @@ export const Route = createRootRoute({
         href: "https://fonts.googleapis.com",
       },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
-      },
+      { rel: "preload", as: "style", href: FONTS_HREF },
     ],
   }),
   shellComponent: RootShell,
@@ -79,9 +84,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <noscript>
+          <link rel="stylesheet" href={FONTS_HREF} />
+        </noscript>
       </head>
       <body>
         <ScriptOnce>{themeInitScript}</ScriptOnce>
+        <ScriptOnce>{fontsLoaderScript}</ScriptOnce>
         {children}
         <Scripts />
       </body>
