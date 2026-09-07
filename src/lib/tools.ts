@@ -46,6 +46,13 @@ export interface Tool {
   slug: string;
   category: ToolCategory;
   name: string;
+  /**
+   * Name used in <title>, og:title and schema, when the UI name does not match
+   * how people search. The converters read nicely as "YAML ↔ JSON" in the
+   * sidebar, but nobody types "↔" - they search "yaml to json", so the arrow
+   * silently removes the most valuable word in the query from the title.
+   */
+  seoName?: string;
   description: string;
   longDescription: string;
   about: string;
@@ -550,7 +557,7 @@ export const TOOLS: Tool[] = [
     longDescription: "Visual crop with preset aspect ratios. Browser-only.",
     about:
       "Crop Image lets you trim an image to a specific area or aspect ratio with a visual selection box. Use the presets for common ratios (1:1, 4:3, 16:9) or drag a free-form selection - handy for social-media avatars, banner artwork, or removing distracting edges.",
-    keywords: ["crop", "trim", "image", "aspect"],
+    keywords: ["crop image", "image cropper", "crop photo", "trim", "aspect ratio", "crop"],
     icon: Crop,
     path: "/image/crop",
     howTo: [
@@ -598,11 +605,20 @@ export const TOOLS: Tool[] = [
     slug: "image-base64",
     category: "image",
     name: "Image ↔ Base64",
+    seoName: "Image to Base64 Converter",
     description: "Encode images to Base64 or decode back.",
     longDescription: "Generate data: URIs from images, or recover an image from a Base64 string.",
     about:
       "Image ↔ Base64 converts images to data URIs you can paste straight into HTML, CSS, or JSON, and decodes Base64 strings back into downloadable images. Useful for embedding small icons inline, debugging API payloads, or recovering an image from a copied data URL.",
-    keywords: ["base64", "data uri", "image", "encode", "decode"],
+    keywords: [
+      "image to base64",
+      "base64 to image",
+      "base64",
+      "data uri",
+      "image",
+      "encode",
+      "converter",
+    ],
     icon: Binary,
     path: "/image/base64",
     howTo: ["Drop image to encode, or paste Base64 to decode.", "Copy result or download image."],
@@ -681,7 +697,14 @@ export const TOOLS: Tool[] = [
     longDescription: "Real-time stats for any text. Useful for essays, social posts, SEO copy.",
     about:
       "Word & Character Counter gives you live counts of words, characters (with and without spaces), sentences, paragraphs, lines, and estimated reading time. Use it to fit copy into Twitter or meta-description limits, hit an essay word target, or sanity-check the length of an article.",
-    keywords: ["word count", "character count", "reading time", "stats"],
+    keywords: [
+      "word count",
+      "character count",
+      "characters to words",
+      "letter count",
+      "reading time",
+      "stats",
+    ],
     icon: Hash,
     path: "/text/word-counter",
     howTo: ["Paste text.", "See live counts.", "Copy stats if needed."],
@@ -797,11 +820,20 @@ export const TOOLS: Tool[] = [
     slug: "markdown-html",
     category: "text",
     name: "Markdown ↔ HTML",
+    seoName: "Markdown to HTML Converter",
     description: "Convert Markdown to HTML and back.",
     longDescription: "Live preview Markdown → HTML rendering, and HTML → Markdown. All in browser.",
     about:
       "Markdown ↔ HTML converts between Markdown and HTML in either direction with a live preview. Use it to draft a blog post in Markdown and copy clean HTML into a CMS, or to convert legacy HTML snippets back into editable Markdown.",
-    keywords: ["markdown", "md", "html", "convert", "preview"],
+    keywords: [
+      "markdown to html",
+      "html to markdown",
+      "markdown",
+      "md",
+      "html",
+      "converter",
+      "preview",
+    ],
     icon: FileCode,
     path: "/text/markdown-html",
     howTo: ["Paste source.", "See live preview.", "Copy the conversion."],
@@ -821,11 +853,12 @@ export const TOOLS: Tool[] = [
     slug: "csv-json",
     category: "text",
     name: "CSV ↔ JSON",
+    seoName: "CSV to JSON Converter",
     description: "Convert CSV data to JSON and back.",
     longDescription: "Auto-detects headers, quoting, and types. No data leaves your browser.",
     about:
       "CSV ↔ JSON converts spreadsheet data to JSON arrays and back, with auto-detection of delimiters, optional type inference, and configurable headers. Use it to feed CSV exports into a JSON-based API, or to flatten an API response into a sheet you can open in Excel.",
-    keywords: ["csv", "json", "convert", "data"],
+    keywords: ["csv to json", "json to csv", "csv", "json", "converter", "data", "spreadsheet"],
     icon: FileJson,
     path: "/text/csv-json",
     howTo: ["Paste CSV or JSON.", "Pick direction.", "Copy result."],
@@ -849,11 +882,21 @@ export const TOOLS: Tool[] = [
     slug: "yaml-json",
     category: "text",
     name: "YAML ↔ JSON",
+    seoName: "YAML to JSON Converter",
     description: "Convert YAML to JSON and back.",
     longDescription: "Strict YAML parser, pretty-prints both directions.",
     about:
       "YAML ↔ JSON converts between the two formats in either direction, with strict YAML parsing and pretty-printed output. Useful for translating a Kubernetes or CI config to JSON for inspection, or generating YAML from a JSON snippet you copied from documentation.",
-    keywords: ["yaml", "json", "convert", "config"],
+    keywords: [
+      "yaml to json",
+      "json to yaml",
+      "yaml",
+      "json",
+      "yml",
+      "converter",
+      "parser",
+      "config",
+    ],
     icon: Braces,
     path: "/text/yaml-json",
     howTo: ["Paste YAML or JSON.", "Pick direction.", "Copy result."],
@@ -873,11 +916,19 @@ export const TOOLS: Tool[] = [
     slug: "svg-optimizer",
     category: "text",
     name: "SVG Optimizer",
-    description: "Minify and clean SVG markup.",
+    description: "SVG optimization: minify and clean SVG markup.",
     longDescription: "SVGO-powered cleanup: remove metadata, collapse styles, shrink paths.",
     about:
       "SVG Optimizer runs SVGO in your browser to strip editor metadata, collapse redundant styles, and shrink path data - typically cutting SVG file size in half or more without changing how the icon looks. Use it before shipping icons in a web app or embedding SVG inline in HTML.",
-    keywords: ["svg", "optimize", "minify", "clean"],
+    keywords: [
+      "svg optimization",
+      "optimize svg",
+      "compress svg",
+      "minify svg",
+      "svgo",
+      "svg",
+      "clean",
+    ],
     icon: FileCode,
     path: "/text/svg-optimizer",
     howTo: ["Paste or upload SVG.", "Click ‘Optimize’.", "Download or copy."],

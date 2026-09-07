@@ -43,7 +43,12 @@ export interface ToolSeoPreview {
 }
 
 export function buildToolSeo(tool: Tool): ToolSeoPreview {
-  const title = `${tool.name} - Free, In-Browser, No Upload | ${SITE_NAME}`;
+  // Search-facing name: matches how people actually query (see Tool.seoName).
+  const searchName = tool.seoName ?? tool.name;
+  // Keep the suffix short. Google truncates titles around 60 characters, and
+  // the old " - Free, In-Browser, No Upload | DocnTools" ran to 41 of them,
+  // pushing 12 tool names past the cut. "No Upload" carries the differentiator.
+  const title = `${searchName} - Free, No Upload | ${SITE_NAME}`;
   const fullDescription =
     `${tool.description} 100% free, no signup, processed in your browser. ${tool.longDescription}`.slice(
       0,
@@ -59,7 +64,7 @@ export function buildToolSeo(tool: Tool): ToolSeoPreview {
       data: {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: tool.name,
+        name: searchName,
         description: tool.description,
         url,
         applicationCategory: "UtilitiesApplication",
@@ -77,7 +82,7 @@ export function buildToolSeo(tool: Tool): ToolSeoPreview {
       data: {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        name: tool.name,
+        name: searchName,
         url,
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "Any",
@@ -102,7 +107,7 @@ export function buildToolSeo(tool: Tool): ToolSeoPreview {
       data: {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        name: `How to use ${tool.name}`,
+        name: `How to use ${searchName}`,
         description: tool.description,
         totalTime: "PT1M",
         step: tool.howTo.map((s, i) => ({
