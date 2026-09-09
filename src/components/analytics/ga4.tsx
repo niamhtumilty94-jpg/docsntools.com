@@ -1,8 +1,11 @@
 import { useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
+import { GA4_ENABLED, GA4_MEASUREMENT_ID } from "@/lib/analytics";
+
 /**
- * Google Analytics 4, loaded once when VITE_GA4_MEASUREMENT_ID is set.
+ * Google Analytics 4, loaded once when a Measurement ID is configured
+ * (see @/lib/analytics).
  *
  * Two deliberate choices:
  *
@@ -29,7 +32,7 @@ declare global {
 const LOADER_ATTR = "data-ga4-loader";
 
 export function GA4Analytics() {
-  const measurementId = import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined;
+  const measurementId = GA4_ENABLED ? GA4_MEASUREMENT_ID : "";
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const loaded = useRef(false);
 

@@ -19,11 +19,12 @@ There are no automated tests. Lint and type-check are the primary correctness ga
 
 Copy `.env.example` to `.env`. Key variables:
 
-| Variable                | Purpose                                                                                                  |
-| ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| `VITE_SITE_URL`         | Canonical origin - must be set before building for production (affects sitemap, canonical URLs, OG tags) |
-| `VITE_UMAMI_WEBSITE_ID` | Optional analytics                                                                                       |
-| `VITE_UMAMI_SRC`        | Optional analytics script URL                                                                            |
+| Variable                  | Purpose                                                                                                  |
+| ------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `VITE_SITE_URL`           | Canonical origin - must be set before building for production (affects sitemap, canonical URLs, OG tags) |
+| `VITE_GA4_MEASUREMENT_ID` | Optional - overrides the GA4 Measurement ID defaulted in `src/lib/analytics.ts`; set to `""` to disable  |
+| `VITE_UMAMI_WEBSITE_ID`   | Optional analytics                                                                                       |
+| `VITE_UMAMI_SRC`          | Optional analytics script URL                                                                            |
 
 ## Architecture
 

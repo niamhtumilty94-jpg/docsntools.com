@@ -1,9 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { GA4_ENABLED } from "@/lib/analytics";
 import { pageHead } from "@/lib/seo";
-
-/** Only disclose GA4 when it is actually configured for this build. */
-const GA4_ENABLED = Boolean(import.meta.env.VITE_GA4_MEASUREMENT_ID);
 
 export const Route = createFileRoute("/privacy")({
   head: () =>
